@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>성화의 성공노트4</title>
+    <title>성화의 성공노트3</title>
     <style>
         #notepad {
             width: 100%;
@@ -20,8 +20,6 @@
     <script>
         const repo = 'sunghwa1004/save'; // 저장소의 이름입니다.
         const file = 'memo'; // 저장할 파일의 이름입니다.
-        const token = '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'; // 인증 토큰입니다.
-        const saveInterval = 60000; // 자동 저장 간격(밀리초 단위)
 
         function updateCount() {
             var notepad = document.getElementById('notepad');
@@ -45,20 +43,18 @@
             fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
-                    'Authorization': token
+                    'Authorization': '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'
                 }
             })
             .then(response => response.json())
             .then(data => {
                 const sha = data.sha;
-                const existingContent = atob(data.content); // 기존 파일 내용을 가져옵니다.
-                const updatedContent = existingContent + '\n' + content; // 기존 내용 뒤에 새로운 내용을 추가합니다.
-                const encodedContent = btoa(updatedContent);
+                const encodedContent = btoa(unescape(encodeURIComponent(content)));
 
                 fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': token,
+                        'Authorization': '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',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -80,32 +76,23 @@
             });
         }
 
-        function autoSave() {
-            setInterval(function() {
-                save();
-            }, saveInterval);
-        }
-
         window.onload = function() {
             fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
-                    'Authorization': token
+                    'Authorization': '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'
                 }
             })
             .then(response => response.json())
             .then(data => {
                 var notepad = document.getElementById('notepad');
-                var decodedContent = atob(data.content);
+                var decodedContent = decodeURIComponent(escape(window.atob(data.content)));
                 notepad.value = decodedContent;
                 updateCount();
             })
             .catch(error => {
                 showMessage('파일을 찾을 수 없습니다.');
             });
-
-            // 자동 저장 기능을 활성화합니다.
-            autoSave();
         };
     </script>
 </body>
