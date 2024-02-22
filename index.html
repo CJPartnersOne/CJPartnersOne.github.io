@@ -43,7 +43,7 @@
             fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
-                    'Authorization': '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'
+                    'Authorization': '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'
                 }
             })
             .then(response => response.json())
@@ -54,7 +54,7 @@
                 fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': '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',
+                        'Authorization': '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',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
