@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>성화의 성공노트3</title>
+    <title>성화의 성공노트5</title>
     <style>
         #notepad {
             width: 100%;
@@ -43,7 +43,7 @@
             fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
-                    'Authorization': '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'
+                    'Authorization': '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'
                 }
             })
             .then(response => response.json())
@@ -54,7 +54,7 @@
                 fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': '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',
+                        'Authorization': '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',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -80,7 +80,7 @@
             fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
-                    'Authorization': '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'
+                    'Authorization': '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'
                 }
             })
             .then(response => response.json())
