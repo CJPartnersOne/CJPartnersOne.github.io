@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>성화의 성공적인 취업을 위한 노트</title>
+    <title>성화의 성공노트</title>
     <style>
         #notepad {
             width: 100%;
@@ -16,7 +16,7 @@
     <textarea id="notepad" oninput="updateCount()" maxlength="10000"></textarea>
     <p id="count">0 / 10000</p>
     <button onclick="save()">Save</button>
-    <p id="message"></p>
+    <p id="message" style="visibility: hidden;"></p>
     <script>
         const repo = 'save'; // 저장소의 이름입니다.
         const file = 'memo'; // 저장할 파일의 이름입니다.
@@ -40,7 +40,7 @@
             var notepad = document.getElementById('notepad');
             var content = notepad.value;
 
-            fetch('https://api.github.com/repos/' + repo + '/' + file, {
+            fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
                     'Authorization': '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'
@@ -51,7 +51,7 @@
                 const sha = data.sha;
                 const encodedContent = btoa(unescape(encodeURIComponent(content)));
 
-                fetch('https://api.github.com/repos/' + repo + '/' + file, {
+                fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                     method: 'PUT',
                     headers: {
                         'Authorization': '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',
@@ -77,7 +77,7 @@
         }
 
         window.onload = function() {
-            fetch('https://api.github.com/repos/' + repo + '/' + file, {
+            fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
                 method: 'GET',
                 headers: {
                     'Authorization': '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'
