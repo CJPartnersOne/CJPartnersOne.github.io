@@ -1,112 +1,257 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>성화의 성공적인 취업을 위해</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[CJ그룹 사내벤처] 'CJ Partners ONE' 핵심 개발자 채용</title>
     <style>
-        #notepad {
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+        :root {
+            --cj-red: #e21836;
+            --cj-yellow: #ffd500;
+            --cj-blue: #0073e6;
+            --cj-gray: #666666;
+            --text-dark: #212529;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
             width: 100%;
-            height: 90vh;
+            background-color: #ffffff;
+            margin: 40px 20px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid;
+            border-image: linear-gradient(to right, var(--cj-blue), var(--cj-red), var(--cj-yellow)) 1;
         }
-        #message {
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s 2s, opacity 2s linear;
+
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
         }
-        #message.show {
-            visibility: visible;
-            opacity: 1;
-            transition: visibility 0s 0s, opacity 2s linear;
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--text-dark);
         }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: var(--cj-red);
+            font-weight: 700;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--cj-red);
+            border-left: 4px solid var(--cj-red);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .job-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            padding: 25px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .job-card .position {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        
+        .job-card .position .tag {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--cj-gray);
+            margin-left: 10px;
+        }
+
+        .job-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--cj-blue); /* Blue for sub-headers */
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .job-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .job-card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .job-card li::before {
+            content: '■';
+            position: absolute;
+            left: 0;
+            color: var(--cj-yellow); /* Yellow for accents */
+            font-size: 10px;
+            top: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background-color: var(--cj-red);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(226, 24, 54, 0.3);
+        }
+
+        .apply-button:hover {
+            background-color: #c4142f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(226, 24, 54, 0.4);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 10px;
+                padding: 25px;
+                border-top-width: 4px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .header .subtitle {
+                font-size: 16px;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <textarea id="notepad" oninput="updateCount()" maxlength="10000"></textarea>
-    <p id="count">0 / 10000</p>
-    <button onclick="save(true)">Save</button>
-    <p id="message"></p>
-    <script>
-        var token = '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'; // GitHub API를 호출하기 위한 토큰입니다.
-        var repo = 'sunghwa1004/save'; // 저장소의 이름입니다.
-        var file = 'memo'; // 저장할 파일의 이름입니다.
 
-        function updateCount() {
-            var notepad = document.getElementById('notepad');
-            var count = document.getElementById('count');
-            count.innerText = notepad.value.length + ' / 10000';
-        }
+    <div class="container">
+        <div class="header">
+            <h1>[CJ Partners One]</h1>
+            <p class="subtitle">대한민국 외식 산업의 미래를 코딩할 '어벤져스'를 찾습니다.</p>
+            <p style="color: var(--cj-gray); font-size: 16px;">"저희는 단순한 웹이 아닌, 새로운 '생태계'를 만듭니다."</p>
+        </div>
 
-        function showMessage(text) {
-            var message = document.getElementById('message');
-            message.innerText = text;
-            message.className = 'show';
-            setTimeout(function() {
-                message.className = '';
-            }, 2000);
-        }
+        <div class="section">
+            <h2>🚀 We are looking for...</h2>
+            
+            <div class="job-card">
+                <div class="position">리드 백엔드 개발자 <span class="tag">- The Architect</span></div>
+                <h3>목표</h3>
+                <p style="color: var(--cj-gray);">수십만 가맹점의 대규모 트래픽과 수조 원의 금융 거래를 안정적으로 처리할 수 있는 확장 가능한 서버 아키텍처를 설계하고 구축합니다. 팀의 기술적인 방향성과 표준을 결정하며, 이 거대한 플랫폼의 심장과 중추신경계를 만듭니다.</p>
+                <h3>이런 분을 찾습니다</h3>
+                <ul>
+                    <li>마이크로서비스 아키텍처(MSA) 패턴에 대한 이해와 실제 프로젝트 적용 경험, 대용량 트래픽 처리 시스템 설계 경험이 있으신 분.</li>
+                    <li>Java/Kotlin(Spring), Go, Python(Django/FastAPI) 등 하나 이상의 백엔드 기술 스택에 대한 깊은 이해를 가지신 분.</li>
+                    <li>DB에 대한 깊은 이해와 실제 서비스 적용 경험이 있으신 분.</li>
+                </ul>
+                <h3>이런 분이면 더 좋습니다</h3>
+                <ul>
+                    <li>결제/금융 시스템 개발 경험이 있으신 분.</li>
+                    <li>대용량 데이터 처리 파이프라인 구축 경험이 있으신 분.</li>
+                    <li>★정보 보안에 대한 높은 이해도를 가지신 분.★</li>
+                </ul>
+            </div>
 
-        function save(showPopup) {
-            var notepad = document.getElementById('notepad');
-            var content = notepad.value;
+            <div class="job-card">
+                <div class="position">프론트엔드 개발자 <span class="tag">- The Experience Maker</span></div>
+                <h3>목표</h3>
+                <p style="color: var(--cj-gray);">소상공인 사장님들이 매일 사용하는 점주용 웹 대시보드와, 수많은 소비자들이 주문할 테이블오더 UI/UX를 개발합니다. 복잡한 데이터를 직관적으로 시각화하고, 고객이 매일 마주할 '얼굴'과 '경험'을 창조합니다.</p>
+                <h3>이런 분을 찾습니다</h3>
+                <ul>
+                    <li>React, Vue.js 등 하나 이상의 모던 JavaScript 프레임워크를 사용한 복잡한 웹 애플리케이션 개발 및 운영 경험이 있으신 분.</li>
+                    <li>HTML5, CSS3, JavaScript(ES6+) 및 브라우저 렌더링 원리에 대한 탄탄한 지식을 보유하신 분.</li>
+                    <li>디자이너와 긴밀하게 협업하여 디자인 시스템을 구축하고, 사용성 높은 인터페이스를 구현하는 능력을 갖추신 분.</li>
+                </ul>
+                <h3>이런 분이면 더 좋습니다</h3>
+                <ul>
+                    <li>토스처럼 깔끔한 디자인을 구현 가능하신 분.</li>
+                    <li>데이터 시각화 라이브러리(D3.js, Chart.js 등) 사용 경험이 있으신 분.</li>
+                </ul>
+            </div>
 
-            // UTF-8로 인코딩한 후 Base64로 인코딩합니다.
-            var encodedContent = btoa(unescape(encodeURIComponent(content)));
+            <div class="job-card">
+                <div class="position">플랫폼 엔지니어 / SRE <span class="tag">- The Guardian</span></div>
+                <h3>목표</h3>
+                <p style="color: var(--cj-gray);">AWS, GCP 등 클라우드 환경 위에 'CJ Partners ONE'이 작동할 안정적이고 확장 가능한 인프라를 코드로 설계하고 구축합니다. CI/CD 파이프라인을 통해 개발 생산성을 극대화하고, 24시간 서비스의 신뢰성을 지키는 수호자가 됩니다.</p>
+                <h3>이런 분을 찾습니다</h3>
+                <ul>
+                    <li>AWS, GCP, Azure 등 하나 이상의 클라우드 플랫폼 환경에서의 인프라 설계 및 운영 경험이 있으신 분.</li>
+                    <li>Docker 환경에서의 애플리케이션 배포 및 운영 경험이 있으신 분.</li>
+                    <li>모니터링 시스템 구축 및 운영 경험이 있으신 분.</li>
+                </ul>
+                <h3>이런 분이면 더 좋습니다</h3>
+                <ul>
+                    <li>대규모 서비스 운영 경험이 있으신 분.</li>
+                    <li>정보 보안 및 네트워크에 대한 깊은 지식을 보유하신 분.</li>
+                    <li>스크립트 언어(Python, Shell Script)를 이용한 자동화 능력을 갖추신 분.</li>
+                </ul>
+            </div>
+        </div>
 
-            // GitHub API를 호출하여 파일의 정보를 가져옵니다.
-            fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
-                headers: {
-                    'Authorization': 'token ' + token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                var sha = data.sha; // 파일의 SHA 값을 가져옵니다.
+        <div class="section">
+            <h2>💡 Why 'CJ Partners ONE'?</h2>
+            <div class="job-card" style="border-left: 4px solid var(--cj-blue);">
+                <ul>
+                    <li><strong>도전 :</strong> CJ가 보유한 기술들을 활용하여 최고의 효율을 뽑아 내는것이 목표입니다.</li>
+                    <li><strong>압도적인 임팩트 :</strong> 당신이 작성한 코드는 수십만 소상공인의 비즈니스를 바꾸고, 수천만 소비자의 일상을 편리하게 만들며, CJ그룹의 미래를 이끌어갑니다.</li>
+                    <li><strong>그룹의 전폭적인 지원 :</strong> 사내벤처의 빠른 실행 속도와 그룹의 안정적인 지원을 동시에 누릴 수 있는 최적의 환경을 제공합니다. </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSemQhnDNmN1Q8yG0sLjPwRQdyHV-Xg7cfRHMjyNQ-ygq1zESg/viewform?usp=dialog" class="apply-button" target="_blank" rel="noopener noreferrer">
+                지금 바로 지원하기
+            </a>
+            <p style="font-size: 14px; color: var(--cj-gray); margin-top: 20px;">대한민국 라이프스타일의 새로운 역사를 쓸 당신의 도전을 기다립니다.</p>
+        </div>
+    </div>
 
-                // GitHub API를 호출하여 파일을 업데이트합니다.
-                fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': 'token ' + token,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: 'Update file',
-                        content: encodedContent,
-                        sha: sha // SHA 값을 제공합니다.
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    if (showPopup) {
-                        alert('저장되었습니다.');
-                    } else {
-                        showMessage('자동으로 저장되었습니다.');
-                    }
-                });
-            });
-        }
-
-        // 페이지가 로드될 때 저장된 메모를 불러옵니다.
-        window.onload = function() {
-            fetch('https://api.github.com/repos/' + repo + '/contents/' + file, {
-                headers: {
-                    'Authorization': 'token ' + token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                var notepad = document.getElementById('notepad');
-                // UTF-8로 디코딩한 후 Base64로 디코딩합니다.
-                var decodedContent = decodeURIComponent(escape(window.atob(data.content)));
-                notepad.value = decodedContent;
-                updateCount();
-            });
-
-            // 30분마다 메모를 자동으로 저장합니다.
-            setInterval(function() {
-                save(false);
-            }, 30 * 60 * 1000);
-        };
-    </script>
 </body>
 </html>
