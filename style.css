@@ -1,0 +1,257 @@
+@import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
+
+:root {
+    --toss-blue: #0070F3;
+    --background-gray: #F2F4F6;
+    --text-primary: #333D4B;
+    --text-secondary: #8B95A1;
+    --border-gray: #E5E8EB;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Spoqa Han Sans Neo', 'Noto Sans KR', sans-serif;
+    background-color: var(--background-gray);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Sidebar Navigation --- */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: #fff;
+    border-right: 1px solid var(--border-gray);
+    padding: 30px;
+    box-sizing: border-box;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-header {
+    margin-bottom: 40px;
+}
+
+.sidebar-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.sidebar-header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 5px 0 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar li a:hover {
+    background-color: #F2F4F6;
+    color: var(--text-primary);
+}
+
+.sidebar li a.active {
+    background-color: #E8F3FF;
+    color: var(--toss-blue);
+    font-weight: 700;
+}
+
+/* --- Main Content --- */
+.main-content {
+    margin-left: 240px; /* Sidebar width */
+    width: calc(100% - 240px);
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.container {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 50px 60px;
+}
+
+/* --- Mobile Navigation --- */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid var(--border-gray);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .container {
+        padding: 80px 30px 30px;
+    }
+}
+
+/* --- Original Styles --- */
+.header { padding-bottom: 30px; margin-bottom: 30px; border-bottom: 1px solid var(--border-gray); }
+.header h1 { font-size: 36px; font-weight: 700; margin: 0 0 10px; }
+.contact-info { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 20px; }
+.contact-info a { color: var(--text-secondary); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.contact-info a:hover { color: var(--toss-blue); }
+.contact-info i { margin-right: 8px; width: 16px; }
+.profile-summary { font-size: 18px; line-height: 1.7; color: var(--text-primary); background-color: #F7F8FA; padding: 20px; border-radius: 8px; }
+.section { padding-top: 30px; } /* Add padding for scroll spy */
+.section-title { font-size: 24px; font-weight: 700; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--toss-blue); display: inline-block; }
+.project-card { margin-bottom: 35px; }
+.project-card-header { margin-bottom: 15px; }
+.project-title { font-size: 20px; font-weight: 700; }
+.project-meta { font-size: 14px; color: var(--text-secondary); }
+.project-section { margin-bottom: 15px; }
+.project-section h4 { font-size: 16px; font-weight: 700; color: var(--toss-blue); margin-bottom: 8px; }
+.project-section ul { list-style-type: none; padding-left: 0; margin: 0; }
+.project-section li { position: relative; padding-left: 20px; margin-bottom: 8px; line-height: 1.7; }
+.project-section li::before { content: '•'; position: absolute; left: 0; color: var(--toss-blue); font-weight: 700; }
+.skills-container { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tag { background-color: #EEF1F4; color: #4E5968; font-size: 14px; padding: 6px 12px; border-radius: 16px; }
+hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
+.career-timeline { width: 100%; padding: 20px 0; }
+.timeline-chart { position: relative; height: 220px; width: 100%; }
+.timeline-bar { position: absolute; height: 35px; border-radius: 6px; background-color: #E5E8EB; display: flex; align-items: center; padding: 0 15px; box-sizing: border-box; transition: all 0.3s ease; overflow: hidden; }
+.timeline-bar.current { background-color: var(--toss-blue); color: white; }
+.timeline-bar:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.bar-label { white-space: nowrap; font-size: 14px; }
+.bar-tooltip { position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; pointer-events: none; }
+.timeline-bar:hover .bar-tooltip { opacity: 1; visibility: visible; }
+.timeline-axis { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-gray); }
+.axis-marker { font-size: 12px; color: var(--text-secondary); }
+
+@media (max-width: 768px) {
+    .header h1 { font-size: 28px; }
+    .profile-summary { font-size: 16px; }
+}
+
+.toss-button-container {
+    margin-bottom: 25px;
+}
+
+.toss-button {
+    width: 100%;
+    background-color: var(--toss-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.toss-button:hover {
+    background-color: #0056B3;
+    transform: translateY(-2px);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    transform: scale(0.95);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: calc(90vh - 40px); /* 90vh에서 padding 값을 뺌 */
+    border-radius: 8px;
+}
+
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: var(--text-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}

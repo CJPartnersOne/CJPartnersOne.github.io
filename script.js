@@ -1,0 +1,123 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Timeline Graph Logic ---
+    const timelineBars = document.querySelectorAll('.timeline-bar');
+    const timelineAxis = document.querySelector('.timeline-axis');
+    if (timelineBars.length > 0 && timelineAxis) {
+        const START_YEAR = 2014;
+        const END_YEAR = new Date().getFullYear() + 1;
+        const totalMonths = (END_YEAR - START_YEAR) * 12;
+        const yPositions = ['70px', '120px', '170px'];
+
+        timelineBars.forEach((bar, index) => {
+            const startDateStr = bar.dataset.start;
+            const endDateStr = bar.dataset.end;
+            const [startYear, startMonth] = startDateStr.split('.').map(Number);
+            let endYear, endMonth;
+            if (endDateStr.toLowerCase() === 'present') {
+                const now = new Date();
+                endYear = now.getFullYear();
+                endMonth = now.getMonth() + 1;
+            } else {
+                [endYear, endMonth] = endDateStr.split('.').map(Number);
+            }
+            const startOffsetMonths = (startYear - START_YEAR) * 12 + (startMonth - 1);
+            const endOffsetMonths = (endYear - START_YEAR) * 12 + (endMonth - 1);
+            const durationMonths = endOffsetMonths - startOffsetMonths + 1;
+            const leftPercentage = (startOffsetMonths / totalMonths) * 100;
+            const widthPercentage = (durationMonths / totalMonths) * 100;
+            bar.style.left = `${leftPercentage}%`;
+            bar.style.width = `${widthPercentage}%`;
+            bar.style.top = yPositions[index % yPositions.length];
+            const durationYears = Math.floor(durationMonths / 12);
+            const durationRemainderMonths = durationMonths % 12;
+            let durationText = '';
+            if(durationYears > 0) durationText += `${durationYears}년 `;
+            if(durationRemainderMonths > 0) durationText += `${durationRemainderMonths}개월`;
+            const tooltip = bar.querySelector('.bar-tooltip');
+            tooltip.textContent = `${startDateStr} ~ ${endDateStr} (${durationText.trim()})`;
+        });
+
+        timelineAxis.innerHTML = '';
+        for (let year = START_YEAR; year <= END_YEAR; year++) {
+            const marker = document.createElement('div');
+            marker.className = 'axis-marker';
+            marker.textContent = year;
+            timelineAxis.appendChild(marker);
+        }
+    }
+
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    const navLinks = document.querySelectorAll('.sidebar a');
+    const sections = document.querySelectorAll('.section');
+
+
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+
+    mainContent.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (mainContent.scrollTop >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+});
+
+const openModalBtns = document.querySelectorAll('.open-modal-btn'); // 모든 버튼을 선택
+const imageModal = document.getElementById('image-modal');
+const closeModalBtn = document.getElementById('close-modal-btn');
+const modalImage = document.getElementById('modal-image'); // id로 img 태그 선택
+
+if (imageModal && closeModalBtn && modalImage) {
+    // 각 버튼에 대해 클릭 이벤트 추가
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const imgSrc = btn.dataset.imgSrc; // 클릭된 버튼의 data-img-src 값을 가져옴
+            if (imgSrc) {
+                modalImage.src = imgSrc; // img 태그의 src를 변경
+                imageModal.classList.add('visible'); // 모달을 띄움
+            }
+        });
+    });
+
+    // 닫기 버튼 이벤트
+    closeModalBtn.addEventListener('click', () => {
+        imageModal.classList.remove('visible');
+    });
+
+    // 오버레이 클릭 시 닫기 이벤트
+    imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            imageModal.classList.remove('visible');
+        }
+    });
+
+    // Escape 키로 닫기 이벤트
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && imageModal.classList.contains('visible')) {
+            imageModal.classList.remove('visible');
+        }
+    });
+}
