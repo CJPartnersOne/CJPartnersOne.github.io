@@ -385,4 +385,17 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
         width: 80px;
         height: 80px;
     }
+    .timeline-axis .axis-marker {
+        /* 모바일에서는 기본적으로 모든 연도를 숨깁니다. */
+        display: none;
+    }
+
+    /* 
+       그 다음, 홀수 번째 연도(2014, 2016, 2018...)와 
+       가장 마지막 연도만 다시 화면에 보여줍니다.
+    */
+    .timeline-axis .axis-marker:nth-child(odd),
+    .timeline-axis .axis-marker:last-child {
+        display: block;
+    }
 }
