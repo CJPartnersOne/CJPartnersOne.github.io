@@ -1,5 +1,9 @@
 @import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
-
+@media (max-width: 768px) {
+    .header h1 { font-size: 28px; }
+    .profile-summary { font-size: 16px; }
+    .bar-label { font-size: 6px; }
+}
 :root {
     --toss-blue: #0070F3;
     --background-gray: #F2F4F6;
@@ -116,6 +120,7 @@ body {
     .sidebar {
         transform: translateX(-100%);
     }
+    .bar-label { font-size: 8px; }
     .sidebar.open {
         transform: translateX(0);
         box-shadow: 0 0 40px rgba(0,0,0,0.1);
@@ -169,10 +174,7 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
 .timeline-axis { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-gray); }
 .axis-marker { font-size: 12px; color: var(--text-secondary); }
 
-@media (max-width: 768px) {
-    .header h1 { font-size: 28px; }
-    .profile-summary { font-size: 16px; }
-}
+
 
 .toss-button-container {
     margin-bottom: 25px;
@@ -258,5 +260,84 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
+/* === [추가] '하고 싶은 일' 버튼 스타일 === */
+.ideas-button {
+    background-color: #F2F4F6;
+    color: var(--toss-blue);
+    border: 1px solid transparent;
+}
+.ideas-button:hover {
+    background-color: #E5E8EB;
+    transform: translateY(-2px);
+}
+.ideas-button i {
+    margin-right: 8px;
+}
+
+/* === [추가] '하고 싶은 일' 모달 스타일 === */
+.ideas-modal-content {
+    max-width: 700px;
+    text-align: left;
+    padding: 30px 35px;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-gray);
+}
+.modal-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+.ideas-close-button {
+    position: static;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    width: auto;
+    height: auto;
+    box-shadow: none;
+}
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.feature-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.feature-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.feature-icon i {
+    font-size: 22px;
+}
+.feature-text h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.feature-text p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.7;
 }
