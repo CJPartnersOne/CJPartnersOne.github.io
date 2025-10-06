@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- Timeline Graph Logic ---
+    
     const timelineBars = document.querySelectorAll('.timeline-bar');
     const timelineAxis = document.querySelector('.timeline-axis');
     if (timelineBars.length > 0 && timelineAxis) {
@@ -88,22 +89,39 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModalBtn = document.getElementById('close-modal-btn');
     const modalImage = document.getElementById('modal-image');
 
+    // === [추가] 이미지 캐시 저장용 ===
+    const imageCache = {};
+
     if (imageModal && closeModalBtn && modalImage) {
+        // 페이지 로드시 백그라운드에서 미리 이미지 로드
+        openModalBtns.forEach(btn => {
+            const imgSrc = btn.dataset.imgSrc;
+            if (imgSrc && !imageCache[imgSrc]) {
+                const img = new Image();
+                img.src = imgSrc;
+                img.onload = () => imageCache[imgSrc] = img;
+            }
+        });
+
         openModalBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const imgSrc = btn.dataset.imgSrc;
-                if (imgSrc) {
-                
-                    modalImage.style.opacity = '0';
-                    modalImage.src = ''; 
-                    imageModal.classList.add('visible');
+                if (!imgSrc) return;
 
-             
-                    const preloader = new Image();
-                    preloader.src = imgSrc;
+                modalImage.style.opacity = '0';
+                modalImage.src = ''; 
+                imageModal.classList.add('visible');
 
-             
-                    preloader.onload = () => {
+                // 캐시에 있으면 즉시 표시
+                if (imageCache[imgSrc]) {
+                    modalImage.src = imgSrc;
+                    modalImage.style.opacity = '1';
+                } else {
+                    // 혹시 캐시 안된 경우 대비
+                    const tempImg = new Image();
+                    tempImg.src = imgSrc;
+                    tempImg.onload = () => {
+                        imageCache[imgSrc] = tempImg;
                         modalImage.src = imgSrc;
                         modalImage.style.opacity = '1';
                     };
@@ -111,17 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        function closeImageModal() {
-            imageModal.classList.remove('visible');
-        }
+        const closeImageModal = () => imageModal.classList.remove('visible');
 
         closeModalBtn.addEventListener('click', closeImageModal);
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) {
-                closeImageModal();
-            }
+        imageModal.addEventListener('click', e => {
+            if (e.target === imageModal) closeImageModal();
         });
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && imageModal.classList.contains('visible')) {
                 closeImageModal();
             }
@@ -155,4 +169,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
