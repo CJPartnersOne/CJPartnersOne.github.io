@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const START_YEAR = 2014;
         const END_YEAR = new Date().getFullYear() + 1;
         const totalMonths = (END_YEAR - START_YEAR) * 12;
-        const yPositions = ['20px', '70px', '120px', '170px', '20px', '70px'];
+        const yPositions = ['20px', '70px', '120px'];
 
         timelineBars.forEach((bar, index) => {
             const startDateStr = bar.dataset.start;
@@ -155,3 +155,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
