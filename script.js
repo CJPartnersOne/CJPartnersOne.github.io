@@ -121,3 +121,31 @@ if (imageModal && closeModalBtn && modalImage) {
         }
     });
 }
+
+const ideasButton = document.getElementById('ideas-button');
+    const ideasModal = document.getElementById('ideas-modal');
+    const ideasCloseButton = document.getElementById('ideas-close-button');
+
+    if (ideasButton && ideasModal && ideasCloseButton) {
+        ideasButton.addEventListener('click', () => {
+            ideasModal.classList.add('visible');
+        });
+
+        function closeIdeasModal() {
+            ideasModal.classList.remove('visible');
+        }
+
+        ideasCloseButton.addEventListener('click', closeIdeasModal);
+        ideasModal.addEventListener('click', (event) => {
+            if (event.target === ideasModal) {
+                closeIdeasModal();
+            }
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && ideasModal.classList.contains('visible')) {
+                closeIdeasModal();
+            }
+        });
+    }
+
