@@ -175,6 +175,9 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
 .axis-marker { font-size: 12px; color: var(--text-secondary); }
 
 
+#education.section {
+    margin-bottom: 74vh; 
+}
 
 .toss-button-container {
     margin-bottom: 25px;
@@ -229,10 +232,12 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
     padding: 20px;
     border-radius: 16px;
     max-width: 90%;
-    max-height: 90%;
+    max-height: 90vh; 
     box-shadow: 0 10px 40px rgba(0,0,0,0.2);
     transform: scale(0.95);
     transition: transform 0.3s;
+    /* === [수정 3] 모달 스크롤 기능 추가 === */
+    overflow-y: auto;
 }
 
 .modal-overlay.visible .modal-content {
@@ -241,28 +246,24 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
 
 .modal-content img {
     max-width: 100%;
-    max-height: calc(90vh - 40px); /* 90vh에서 padding 값을 뺌 */
+    max-height: calc(90vh - 40px);
     border-radius: 8px;
+    display: block; /* 이미지 잔상 방지를 위해 추가 */
 }
 
 .close-button {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background-color: var(--text-primary);
-    color: white;
+    position: static;
+    background: none;
     border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    line-height: 40px;
-    text-align: center;
+    font-size: 28px;
+    color: var(--text-secondary);
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    line-height: 1;
+    width: auto;
+    height: auto;
+    box-shadow: none;
 }
 
-/* === [추가] '하고 싶은 일' 버튼 스타일 === */
 .ideas-button {
     background-color: #F2F4F6;
     color: var(--toss-blue);
@@ -276,7 +277,6 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
     margin-right: 8px;
 }
 
-/* === [추가] '하고 싶은 일' 모달 스타일 === */
 .ideas-modal-content {
     max-width: 700px;
     text-align: left;
@@ -340,4 +340,37 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.7;
+}
+
+.profile-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.profile-picture {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    object-position: 70% 10%; 
+    border: 2px solid var(--border-gray);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header h1 {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .profile-main {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .profile-picture {
+        width: 80px;
+        height: 80px;
+    }
 }
