@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const START_YEAR = 2014;
         const END_YEAR = new Date().getFullYear() + 1;
         const totalMonths = (END_YEAR - START_YEAR) * 12;
-        const yPositions = ['70px', '120px', '170px'];
+        const yPositions = ['20px', '70px', '120px', '170px', '20px', '70px'];
 
         timelineBars.forEach((bar, index) => {
             const startDateStr = bar.dataset.start;
@@ -46,18 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
+    // --- Navigation Logic ---
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.sidebar a');
     const sections = document.querySelectorAll('.section');
 
-
     menuToggle.addEventListener('click', () => {
         sidebar.classList.toggle('open');
     });
-
 
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -83,46 +81,55 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
 
-const openModalBtns = document.querySelectorAll('.open-modal-btn'); // 모든 버튼을 선택
-const imageModal = document.getElementById('image-modal');
-const closeModalBtn = document.getElementById('close-modal-btn');
-const modalImage = document.getElementById('modal-image'); // id로 img 태그 선택
 
-if (imageModal && closeModalBtn && modalImage) {
-    // 각 버튼에 대해 클릭 이벤트 추가
-    openModalBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const imgSrc = btn.dataset.imgSrc; // 클릭된 버튼의 data-img-src 값을 가져옴
-            if (imgSrc) {
-                modalImage.src = imgSrc; // img 태그의 src를 변경
-                imageModal.classList.add('visible'); // 모달을 띄움
+    const openModalBtns = document.querySelectorAll('.open-modal-btn');
+    const imageModal = document.getElementById('image-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const modalImage = document.getElementById('modal-image');
+
+    if (imageModal && closeModalBtn && modalImage) {
+        openModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const imgSrc = btn.dataset.imgSrc;
+                if (imgSrc) {
+                
+                    modalImage.style.opacity = '0';
+                    modalImage.src = ''; 
+                    imageModal.classList.add('visible');
+
+             
+                    const preloader = new Image();
+                    preloader.src = imgSrc;
+
+             
+                    preloader.onload = () => {
+                        modalImage.src = imgSrc;
+                        modalImage.style.opacity = '1';
+                    };
+                }
+            });
+        });
+
+        function closeImageModal() {
+            imageModal.classList.remove('visible');
+        }
+
+        closeModalBtn.addEventListener('click', closeImageModal);
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                closeImageModal();
             }
         });
-    });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && imageModal.classList.contains('visible')) {
+                closeImageModal();
+            }
+        });
+    }
 
-    // 닫기 버튼 이벤트
-    closeModalBtn.addEventListener('click', () => {
-        imageModal.classList.remove('visible');
-    });
 
-    // 오버레이 클릭 시 닫기 이벤트
-    imageModal.addEventListener('click', (e) => {
-        if (e.target === imageModal) {
-            imageModal.classList.remove('visible');
-        }
-    });
-
-    // Escape 키로 닫기 이벤트
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && imageModal.classList.contains('visible')) {
-            imageModal.classList.remove('visible');
-        }
-    });
-}
-
-const ideasButton = document.getElementById('ideas-button');
+    const ideasButton = document.getElementById('ideas-button');
     const ideasModal = document.getElementById('ideas-modal');
     const ideasCloseButton = document.getElementById('ideas-close-button');
 
@@ -141,11 +148,10 @@ const ideasButton = document.getElementById('ideas-button');
                 closeIdeasModal();
             }
         });
-
         window.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && ideasModal.classList.contains('visible')) {
                 closeIdeasModal();
             }
         });
     }
-
+});
