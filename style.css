@@ -271,7 +271,7 @@ hr { display: none; }
 .ideas-button { background-color: #F2F4F6; color: var(--toss-blue); border: 1px solid transparent; }
 .ideas-button:hover { background-color: #E5E8EB; transform: translateY(-2px); }
 .ideas-button i { margin-right: 8px; }
-.ideas-modal-content { max-width: 700px; text-align: left; padding: 30px 35px; }
+.ideas-modal-content { max-width: 700px; text-align: left; padding: 30px 35px; overflow-y: auto;}
 .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-gray); }
 .modal-header h2 { font-size: 22px; font-weight: 700; margin: 0; }
 .modal-body { display: flex; flex-direction: column; gap: 20px; }
