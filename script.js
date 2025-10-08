@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-     // --- [수정] Scroll UI Logic (지능형 스크롤 v2) ---
+     // --- [수정] Scroll UI Logic (지능형 스크롤 v3) ---
     const scrollDownIndicator = document.getElementById('scroll-down-indicator');
     const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
     const educationSection = document.getElementById('education');
@@ -226,34 +226,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentScroll = mainContent.scrollTop;
             const windowHeight = mainContent.clientHeight;
             
-            // Case 1: 페이지 최상단에 있을 경우, 첫 섹션으로 이동
-            if (currentScroll < 50) {
-                const firstSection = document.getElementById('projects');
-                if (firstSection) {
-                    mainContent.scrollTo({ top: firstSection.offsetTop - 30, behavior: 'smooth' });
-                }
-                return;
-            }
-
-            // Case 2 & 3: 그 외의 경우
-            // [수정] 기본 스크롤 이동값을 화면 높이의 80% 정도로 조정하여, 덜 내려가도록 설정
-            const defaultNextScroll = currentScroll + (windowHeight * 0.8); 
+            // 1. '한 화면 아래'로 스크롤할 위치를 계산합니다.
+            const pageDownScroll = currentScroll + (windowHeight * 0.8);
+            
             const sectionsArray = Array.from(sections);
+            let nextSectionTop = Infinity; // 다음 섹션의 상단 위치를 무한대로 초기화
 
-            const nextSectionInView = sectionsArray.find(section => {
-                const sectionTop = section.offsetTop;
-                return sectionTop > (currentScroll + 50) && sectionTop < defaultNextScroll;
-            });
-
-            let targetScrollPosition;
-
-            if (nextSectionInView) {
-                // 다음 섹션이 가까우면, 그 섹션 상단으로 이동
-                targetScrollPosition = nextSectionInView.offsetTop - 30;
-            } else {
-                // 다음 섹션이 멀면, 한 화면의 80%만큼 아래로 이동
-                targetScrollPosition = defaultNextScroll;
+            // 2. 현재 스크롤 위치 바로 아래에 있는 '다음 섹션'을 찾습니다.
+            const nextSection = sectionsArray.find(section => section.offsetTop > currentScroll + 50);
+            
+            if (nextSection) {
+                nextSectionTop = nextSection.offsetTop - 30; // 다음 섹션 상단 위치 (여백 포함)
             }
+
+            // 3. '한 화면 아래'와 '다음 섹션 상단' 중 더 가까운(작은) 값으로 이동합니다.
+            const targetScrollPosition = Math.min(pageDownScroll, nextSectionTop);
 
             mainContent.scrollTo({
                 top: targetScrollPosition,
@@ -295,4 +282,5 @@ document.addEventListener('DOMContentLoaded', function() {
         topBtnObserver.observe(educationSection);
     }
 });
+
 
