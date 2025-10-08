@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김도영 | Product Owner</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <!-- [수정] 버전 정보 업데이트 -->
+    <link rel="stylesheet" href="style.css?v=2.1">
     <link rel="icon" type="image/png" href="https://tosskdy.github.io/favicon.png?v=1.0">
     <!-- 썸네일 (OG Image) 설정 -->
     <meta property="og:title" content="김도영 | Product Owner">
@@ -15,26 +16,23 @@
     <meta property="og:url" content="https://tosskdy.github.io/">
     <meta name="twitter:card" content="summary_large_image">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
+    <!-- [추가] PDF 생성을 위한 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <!-- Mobile Navigation Toggle -->
-    <button id="menu-toggle" class="menu-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
+    <button id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
 
-    <!-- Sidebar Navigation -->
     <nav id="sidebar" class="sidebar">
         <div class="sidebar-header">
+            <img src="profile.jpg" alt="김도영 프로필 사진" class="profile-picture">
             <h3>김도영</h3>
             <p>Product Owner</p>
-            <img src="profile.jpg" alt="김도영 프로필 사진" class="profile-picture">
         </div>
         <ul>
             <li><a href="#profile" class="active">Profile</a></li>
             <li><a href="#projects">Projects & Experience</a></li>
-            <li><a href="#Motivation for application">Motivation for application</a></li>
+            <li><a href="#Motivation for application">Motivation</a></li>
             <li><a href="#timeline">Timeline</a></li>
             <li><a href="#Certificate">Certificate</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -42,19 +40,25 @@
         </ul>
     </nav>
 
-    <!-- Main Content -->
     <div id="main-content" class="main-content">
+        <!-- [추가] PDF/출력/공유 버튼 -->
+        <div class="action-buttons">
+            <button id="share-btn" class="action-btn" title="공유하기"><i class="fas fa-share-alt"></i></button>
+            <!-- <button id="print-btn" class="action-btn" title="출력하기"><i class="fas fa-print"></i></button> -->
+            <button id="pdf-btn" class="action-btn" title="PDF로 저장"><i class="fas fa-file-pdf"></i></button>
+        </div>
+
         <div class="container">
-            <header id="profile" class="header section">
-                <!-- <div class="profile-main"> -->
-    
-                    <!-- <img src="profile.jpg" alt="김도영 프로필 사진" class="profile-picture"> -->
+            <header id="profile" class="header section fade-in-up">
+                <div class="profile-main">
                     <h1>김도영 (1998.05.28)</h1>
-                <!-- </div> -->
+                </div>
                 <div class="contact-info">
                     <a href="tel:010-8474-3093"><i class="fas fa-phone"></i> 010-8474-3093</a>
                     <a href="mailto:4576434@naver.com"><i class="fas fa-envelope"></i> 4576434@naver.com</a>
                     <a href="https://tosskdy.github.io/" target="_blank"><i class="fab fa-github"></i> tosskdy.github.io</a>
+                    <img src="qr.png" alt="qr" >
+             
                 </div>
                 <p class="profile-summary">
                     외식업의 'Pain Point'를 현장에서 발견하고, 기술(Code)과 법률(Law)을 넘나들며,<br> 사업 모델로 완성하는 문제 해결사.<br><br> 외식업에 대한 깊은 이해를 바탕으로, 데이터 기반의 가설을 수립하고 제품의 성장을 드라이브하는,<br>'창업가형 Product Owner'입니다.
@@ -65,95 +69,113 @@
                 <section id="projects" class="section fade-in-up">
                     <h2 class="section-title">Projects & Experience</h2>
                     
-
                     <div class="project-card">
-                        <div class="project-card-header">
-                            <h3 class="project-title">'CJ Partners ONE' - AI 기반 소상공인 통합 경영-금융 플랫폼</h3>
-                            <p class="project-meta">2025.08 ~ 2025.10 | (주)CJ그룹 사내벤처 | Project Lead (사업기획/PM/개발/법률검토)</p>
-                        </div>
-                        <div class="project-section">
-                            <h4>1. 문제 정의</h4>
-                            <ul>
-                                <li><strong>사장님:</strong> 6년 이상의 외식 현장 경험을 통해, 사장님들이 매일 겪는 수기 명세서 입력, 주먹구구식 원가 관리 등 운영 비효율로 인한 '숨겨진 비용'이 수익성을 악화시키는 문제점을 발견했습니다.</li>
-                                <li><strong>CJ그룹:</strong> 3,100만 CJ ONE 회원을 보유했음에도, '골목상권'에서의 고객 데이터가 단절되어 있고, 포인트 생태계가 CJ 계열사에만 갇혀 있어 오프라인 결제 시장의 성장 기회를 놓치고 있었습니다.</li>
-                            </ul>
-                        </div>
-                        <div class="project-section">
-                            <h4>2. 가설 수립</h4>
-                            <ul>
-                                <li>"만약 소상공인에게 AI 기반의 All-in-One 경영 솔루션을 제공한다면, 그 대가로 전국 수십만 개의 매장을 CJ ONE 결제망의 '오프라인 단말기'로 확보할 수 있을 것이다."</li>
-                                <li>"이를 통해 확보된 결제 수수료, '플로트' 자금과 독점적 데이터는 그룹의 새로운 핵심 수익원이 될 것이다."</li>
-                                <li>"오프라인에서 확보한 CJ Pay의 고객들에게 CJ계열사 프로모션을 제공하여 강력하게 CJ그룹에 락인할 수 있을 것이다." </li>
-                            </ul>
-                        </div>
-                        <div class="project-section">
-                            <h4>3. 실행 및 본인의 기여</h4>
-                            <ul>
-                                <li><strong>사업 모델 총괄 기획:</strong> 구독료, 데이터 판매, '플로트' 자금 운용 수익 등 다각화된 수익 모델을 설계하고, 사업의 10년치 상세 재무 계획을 수립했습니다.</li>
-                                <li><strong>기술 검증:</strong> 아이디어의 실현 가능성을 증명하기 위해, Python을 활용하여 AI 기반 거래명세서 OCR 분석 및 발주 자동등록 프로토타입을 직접 기획하고 개발하였고, 수기 입력 시간을 90% 이상 단축할 수 있음을 데이터로 증명하였으며, 더 나아가 등록된 데이터를 통하여 실시간 매입단가 변동 및 원가분석이 가능하였습니다.</li>
-                                <li><strong>법률 리스크 분석 및 완화:</strong> 공정거래법(끼워팔기), 전자금융거래법(선불충전 한도), 금산분리 등 핵심 법률 리스크를 분석하고, '사장님 광장(공개 입찰)', '데이터 금고(수익 공유)' 등 리스크를 회피하는 개방형 플랫폼 구조를 설계했습니다.</li>
-                            </ul>
-                        </div>
-                        <div class="project-section">
-                            <h4>4. 결과 및 배운 점</h4>
-                            <ul>
-                                <li><strong>결과:</strong> 최종 선발되지는 못하였으나, 심사 과정에서 운영진으로부터 '반드시 실행해야 할 사업'이라는 강한 공감을 얻으며, 아이디어의 시장 가치를 객관적으로 검증받았습니다.</li>
-                                <li><strong>실패 및 러닝 포인트:</strong> 아이디어의 가치와 별개로, 운영진의 공감을 받았지만, 최종 승인이 이뤄지지 않아, 더 빠른 실행력과 자율성을 가진 애자일 조직인 토스에서 실현하고 싶은 계기가 되었습니다.</li>
-                            </ul>
-                        </div>
-                        <!--이미지 -->
-                        <div class="toss-button-container">
-                            <button class="toss-button open-modal-btn" data-img-src="cj.png">
-                                <i class="fas fa-project"></i> 'CJ Partners ONE' 확인하기
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <div>
+                                    <h3 class="project-title">'CJ Partners ONE' - AI 기반 소상공인 통합 경영-금융 플랫폼</h3>
+                                    <p class="project-meta">2025.08 ~ 2025.10 | (주)CJ그룹 사내벤처 | Project Lead</p>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
+                            <div class="accordion-content">
+                                <div class="project-section"><h4>1. 문제 정의</h4><ul><li><strong>사장님:</strong> 6년 이상의 외식 현장 경험을 통해, 사장님들이 매일 겪는 수기 명세서 입력, 주먹구구식 원가 관리 등 운영 비효율로 인한 '숨겨진 비용'이 수익성을 악화시키는 문제점을 발견했습니다.</li><li><strong>CJ그룹:</strong> 3,100만 CJ ONE 회원을 보유했음에도, '골목상권'에서의 고객 데이터가 단절되어 있고, 포인트 생태계가 CJ 계열사에만 갇혀 있어 오프라인 결제 시장의 성장 기회를 놓치고 있었습니다.</li></ul></div>
+                                <div class="project-section"><h4>2. 가설 수립</h4><ul><li>"만약 소상공인에게 AI 기반의 All-in-One 경영 솔루션을 제공한다면, 그 대가로 전국 수십만 개의 매장을 CJ ONE 결제망의 '오프라인 단말기'로 확보할 수 있을 것이다."</li><li>"이를 통해 확보된 결제 수수료, '플로트' 자금과 독점적 데이터는 그룹의 새로운 핵심 수익원이 될 것이다."</li><li>"오프라인에서 확보한 CJ Pay의 고객들에게 CJ계열사 프로모션을 제공하여 강력하게 CJ그룹에 락인할 수 있을 것이다." </li></ul></div>
+                                <div class="project-section"><h4>3. 실행 및 본인의 기여</h4><ul><li><strong>사업 모델 총괄 기획:</strong> 구독료, 데이터 판매, '플로트' 자금 운용 수익 등 다각화된 수익 모델을 설계하고, 사업의 10년치 상세 재무 계획을 수립했습니다.</li><li><strong>기술 검증:</strong> 아이디어의 실현 가능성을 증명하기 위해, Python을 활용하여 AI 기반 거래명세서 OCR 분석 및 발주 자동등록 프로토타입을 직접 기획하고 개발하였고, 수기 입력 시간을 90% 이상 단축할 수 있음을 데이터로 증명하였으며, 더 나아가 등록된 데이터를 통하여 실시간 매입단가 변동 및 원가분석이 가능하였습니다.</li><li><strong>법률 리스크 분석 및 완화:</strong> 공정거래법(끼워팔기), 전자금융거래법(선불충전 한도), 금산분리 등 핵심 법률 리스크를 분석하고, '사장님 광장(공개 입찰)', '데이터 금고(수익 공유)' 등 리스크를 회피하는 개방형 플랫폼 구조를 설계했습니다.</li></ul></div>
+                                <div class="project-section"><h4>4. 결과 및 배운 점</h4><ul><li><strong>결과:</strong> 최종 선발되지는 못하였으나, 심사 과정에서 운영진으로부터 '반드시 실행해야 할 사업'이라는 강한 공감을 얻으며, 아이디어의 시장 가치를 객관적으로 검증받았습니다.</li><li><strong>실패 및 러닝 포인트:</strong> 아이디어의 가치와 별개로, 운영진의 공감을 받았지만, 최종 승인이 이뤄지지 않아, 더 빠른 실행력과 자율성을 가진 애자일 조직인 토스에서 실현하고 싶은 계기가 되었습니다.</li></ul></div>
+                                <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="cj.png"><i class="fas fa-project-diagram"></i> 'CJ Partners ONE' 확인하기</button></div>
+                                <div class="pdf-image-container"><img src="cj.png" alt="'CJ Partners ONE' 상세 이미지"></div>
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <!-- Other Projects -->
+
                     <div class="project-card">
                         <div class="project-card-header">
                             <h3 class="project-title">문제 해결 및 법률/기술 적용 사례</h3>
                             <p class="project-meta">2017. ~ 현재 | 경험</p>
                         </div>
-                        <div class="project-section"><h4>Python 기반 업무 자동화 솔루션 개발</h4><ul><li><strong>문제:</strong> 외국어 고등학교 복무 중, 상/벌점 관리 등 반복적인 엑셀 업무로 인한 행정력 낭비.</li><li><strong>실행:</strong> <br>-Python을 독학하여, '디스코드' 봇과 연동되는 학생 관리 자동화 프로그램을 개발. 칭찬/벌점 입력, 조회, 엑셀 실시간 저장을 자동화.<br>-구글 클래스룸 숙제 검사 자동화.<br>-PC 미사용 시 PC잠금 기능.</li><li><strong>결과:</strong> 선생님들의 반복 업무 시간을 95% 이상 단축하고, 데이터의 정확성을 높여 업무 효율을 극대화. 아이디어를 현실로 만드는 기술적 실행력을 증명.</li><li><strong>실패 및 러닝 포인트:</strong>python 독학 이후 처음으로 기획하고 개발한 건으로, 당시 html에 대한 이해도가 낮아 python 기반으로 개발을 진행하다보니, 웹페이지가 아닌 디스코드봇으로 만들게 된 점이 아쉬웠으며, 처음 접한 분야라서 시간이 많이 소요되었지만, 원했던 기능이 원할히 돌아가는 모습을 보며 받았던 성취감이 추후 아이디어를 실행에 옮기는 원동력이 되었습니다.</li></ul></div>
-                        <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="상벌점.png"><i class="fas fa-project"></i> '상/벌점 디스코드 봇' 확인하기</button></div><hr>
-                        <div class="project-section"><h4>Python - openpyxl을 활용한 엑셀 자동화 개발</h4><ul><li><strong>문제:</strong> 부모님 회사의 특정 업무가 반복적, 단순 업무이나 시간이 매우 많이 소요됨.</li><li><strong>실행:</strong> <br>-고객의 개인정보 비식별화 프로그램 개발.<br>-국세청 신고 시 1년동안의 내역 중 특정 값이 충족(a+b=c일 때, c의 값을 주고 a와 b 항목을 찾음.)되는 내역을 자동으로 찾아주는 프로그램 개발.</li><li><strong>결과:</strong> 연 매출 100억 이상의 회사로, 자료가 방대하여 어머니가 1~2일 이상 걸리던 작업을 단 1분 이내로 단축.</li><li><strong>실패 및 러닝 포인트:</strong>업무의 효율 증대와 흥미로 시작한 코딩이 부모님께 큰 도움이 된다는 사실을 알게 되었습니다.</li></ul></div><hr>
-                        <div class="project-section"><h4>Python - api를 활용한 보건증 알림톡 개발</h4><ul><li><strong>문제:</strong> 전산에 등록된 직원들의 보건증 만료기한을 모두 확인하여, 대상자에게 매번 직접 알려줘야해서 시간이 매우 많이 소요됨.</li><li><strong>실행:</strong> <br>-사내 사이트의 보건증 항목을 확인하여, api 요청 정보를 알아냄.<br>-api를 활용하여, 직원들의 만료기한을 사전 설정된 기한(만료 30일 미만)에 따라 자동으로 리스트업하여 알림톡 발송 프로그램 개발.</li><li><strong>결과:</strong> 보건증 등록일에 따라 대상자를 분류하고 직접 알려주던 프로세스를 알림톡 발송 및 명단 html 출력까지 단 1분 이내로 단축.</li><li><strong>실패 및 러닝 포인트:</strong>보건증을 대상자가 직접 업로드하는 기능도 구현하여 완전 자동화를 하고 싶었으나, 서버에 업로드가 제한되어 아쉬웠으며, 반대로 오픈api가 아님에도 서버에 데이터가 비암호화 되어 노출된다면, 악용이 가능함을 인지하였습니다.</li></ul></div>
-                        <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="알림톡.png"><i class="fas fa-project"></i> '보건증 알림 톡' 확인하기</button></div><hr>
-                    
-                        <div class="project-section"><h4>Excel - 함수를 활용한 엑셀 자동화 개발</h4><ul><li><strong>문제:</strong> 법적 체크리스트들의 항목들이 매월 특정 부분들을 변경해야 함.</li><li><strong>실행:</strong> <br>-공통 부분을 확인.<br>-함수를 활용하여, today를 체크, 값을 자동으로 변경하도록 함수 설정.</li><li><strong>결과:</strong> 2~30개의 시트들의 각 항목들을 직접 수정하는 기존 방식에서, 엑셀을 열고 출력버튼만 누르도록 변경.</li></ul></div><hr>
-                        <div class="project-section"><h4>'사무장 병원' 문제 해결 (2022고단 2106)</h4><ul><li><strong>문제:</strong> 치과 잠적으로 인한 다수 피해자 발생 및 초기 경찰 수사 난항.</li><li><strong>실행:</strong> <br>-1,400여 명의 피해자를 모집.<br>-계약서 수집 및 '대표원장 변경 이력'이라는 핵심 데이터를 발견하여 분석 자료를 생성. <br>-'사무장 병원' 가설을 세우고 증거를 확보하여 수사기관에 제공.<br>-피해자 대표로서 병원장과 3자대면 진행.<br>-시사프로그램 및 뉴스 인터뷰 출연.<br>-고소장 작성 방법 안내 및 피해 회복 지원.</li><li><strong>결과:</strong> 경찰 내 담당 부서 신설을 이끌어냈으며, 최종적으로 의료법 위반 및 사기죄 징역형이라는 결과를 도출하는 데 결정적인 역할을 수행 및 약 2억원의 기부를 받아 피해자들의 피해회복에 도움을 줌.</li><li><strong>실패 및 러닝 포인트:</strong> : 피해자 전원의 피해 회복을 달성하지 못하여 아쉬웠으나, 1400명을 언론 담당, 피해자 모집, 대관업무, 병원 관계자 컨택 등 능력에 맞게 역할을 부여하고
-                            빠르게 조직을 구성하는 능력을 키웠으며, 큰 사이즈의 사건에서 빠른 실행력으로 문제해결 능력을 키웠습니다. </li></ul></div>
-                        <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="치과.png"><i class="fas fa-project"></i> '시사프로그램 출연' 확인하기</button></div><hr>
-                        
-                        <div class="project-section"><h4>통신사 계약 분쟁 해결 (2022형제 28230)</h4><ul><li><strong>문제:</strong> 5G 서비스 불가지역임에도 불구하고, 위조된 서명을 근거로 통신사가 환불/보상을 거부.</li><li><strong>실행:</strong> <br>-'동의서'의 원본을 요청하여 서명 위조 확인.<br>-대리점의 위조 사실을 인정하는 진술을 확보.<br>-mbc에 5g관련 인터뷰 진행.</li><li><strong>결과:</strong> 명확한 증거를 바탕으로 사문서 위조 및 동행사 혐의로 고소하여, 신속하게 원만한 해결을 이끌어냄.</li></ul></div>
-                        <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="mbc.png"><i class="fas fa-project"></i> 'MBC 인터뷰' 확인하기</button></div><hr>
-                        <div class="project-section"><h4>보험 사기 및 공갈 사건 대응</h4><ul><li><strong>문제:</strong> 지인에게 상대측의 고의성이 의심되는 교통사고 발생, 상대측이 금원을 요구, 경찰이 사건 접수를 거부하는 상황.</li><li><strong>실행:</strong> <br>-진단서 미제출, 병원 미방문, 현금 합의 요구 등 보험 사기의 정황 증거를 수집.<br>-정보공개 청구를 통하여 사고영상 확보.<br>-관련 대법원 판례를 분석하여 30장 분량의 고소장을 작성<br>-신뢰관계인 동석제도를 활용하여, 경찰서 방문 및 피해자 진술 보조.</li><li><strong>결과:</strong> 경찰의 초기 판단을 뒤집고 고소장 접수 및 기소의견 송치를 이끌어냄.</li></ul></div><hr>
-                        <div class="project-section"><h4>임대차 계약 리스크 관리</h4><ul><li><strong>문제:</strong> 팀에서 '문제없음'으로 결론 내린 임차 건물 임대차 계약서의 문제점 발견.</li><li><strong>실행:</strong> <br>-계약서를 재검토하여, 관리비의 특정 부분의 책임이 임대인측에 있으며, 위반 시 임대인측의 위약벌 조항을 발견.<br>-임대차계약서를 기반으로 보고서를 작성하여 제출.</li><li><strong>결과:</strong> 회사의 손실을 사전에 예방하고, 법률 검토 능력을 인정받음.</li></ul></div><hr>
-                        <div class="project-section"><h4>업체 선정 방식 변경</h4><ul><li><strong>문제:</strong> 기존 프로세스 상 기존 업체 혹은 단일 업체를 선정하여, 비용이 많이 발생.</li><li><strong>실행:</strong> <br>-수선 혹은 업체 계약시 필요한 부분을 직접 파악.<br>-필요한 부분만 다수의 업체에 견적서 발급 요청 및 가격 협상 진행.</li><li><strong>결과:</strong> 매 분기 고정비 지출을 20%절약 및 과도한 수선비 억제.</li></ul></div><hr>
-                        <div class="project-section"><h4>금융 투자</h4><ul><li><strong>문제:</strong> 2017년 코인 투자로 -98%손실을 경험.</li><li><strong>실행:</strong> <br>-채권금리, foms회의록, 환율, 미국 금리결정, 양적완화 등 경제에 대하여 공부.<br>-코인, 국내 주식, etf, 해외선물 투자를 진행하며 시장에 지속적 참여로 지식을 얻음.</li><li><strong>결과:</strong> 현재 배당, 해외선물, 국내 주식 투자를 진행하며, 월 평균 500만원 이상의 안정적인 수익을 확보.</li></ul></div><hr>
-                        <div class="project-card">
-                            <div class="project-card-header">
-                                <h3 class="project-title">추가 예정인 프로젝트 (Coming Soon)</h3>
-                            </div>
-                            <div class="project-section">
-                                <ul>
-                                    <li>
-                                        <strong>주식 매매 사이트</strong>
-                                        <span class="status-badge">23시30분 업데이트 예정</span>
-                                    </li>
-                                   
-                                </ul>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">Python 기반 업무 자동화 솔루션 개발</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 외국어 고등학교 복무 중, 상/벌점 관리 등 반복적인 엑셀 업무로 인한 행정력 낭비.</li><li><strong>실행:</strong> <br>-Python을 독학하여, '디스코드' 봇과 연동되는 학생 관리 자동화 프로그램을 개발. 칭찬/벌점 입력, 조회, 엑셀 실시간 저장을 자동화.<br>-구글 클래스룸 숙제 검사 자동화.<br>-PC 미사용 시 PC잠금 기능.</li><li><strong>결과:</strong> 선생님들의 반복 업무 시간을 95% 이상 단축하고, 데이터의 정확성을 높여 업무 효율을 극대화. 아이디어를 현실로 만드는 기술적 실행력을 증명.</li><li><strong>실패 및 러닝 포인트:</strong>python 독학 이후 처음으로 기획하고 개발한 건으로, 당시 html에 대한 이해도가 낮아 python 기반으로 개발을 진행하다보니, 웹페이지가 아닌 디스코드봇으로 만들게 된 점이 아쉬웠으며, 처음 접한 분야라서 시간이 많이 소요되었지만, 원했던 기능이 원할히 돌아가는 모습을 보며 받았던 성취감이 추후 아이디어를 실행에 옮기는 원동력이 되었습니다.</li></ul></div>
+                                <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="상벌점.png"><i class="fas fa-image"></i> '상/벌점 디스코드 봇' 확인하기</button></div>
+                                <div class="pdf-image-container"><img src="상벌점.png" alt="'상/벌점 디스코드 봇' 상세 이미지"></div>
                             </div>
                         </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">Python - openpyxl을 활용한 엑셀 자동화 개발</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 부모님 회사의 특정 업무가 반복적, 단순 업무이나 시간이 매우 많이 소요됨.</li><li><strong>실행:</strong> <br>-고객의 개인정보 비식별화 프로그램 개발.<br>-국세청 신고 시 1년동안의 내역 중 특정 값이 충족(a+b=c일 때, c의 값을 주고 a와 b 항목을 찾음.)되는 내역을 자동으로 찾아주는 프로그램 개발.</li><li><strong>결과:</strong> 연 매출 100억 이상의 회사로, 자료가 방대하여 어머니가 1~2일 이상 걸리던 작업을 단 1분 이내로 단축.</li><li><strong>실패 및 러닝 포인트:</strong>업무의 효율 증대와 흥미로 시작한 코딩이 부모님께 큰 도움이 된다는 사실을 알게 되었습니다.</li></ul></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">Python - api를 활용한 보건증 알림톡 개발</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 전산에 등록된 직원들의 보건증 만료기한을 모두 확인하여, 대상자에게 매번 직접 알려줘야해서 시간이 매우 많이 소요됨.</li><li><strong>실행:</strong> <br>-사내 사이트의 보건증 항목을 확인하여, api 요청 정보를 알아냄.<br>-api를 활용하여, 직원들의 만료기한을 사전 설정된 기한(만료 30일 미만)에 따라 자동으로 리스트업하여 알림톡 발송 프로그램 개발.</li><li><strong>결과:</strong> 보건증 등록일에 따라 대상자를 분류하고 직접 알려주던 프로세스를 알림톡 발송 및 명단 html 출력까지 단 1분 이내로 단축.</li><li><strong>실패 및 러닝 포인트:</strong>보건증을 대상자가 직접 업로드하는 기능도 구현하여 완전 자동화를 하고 싶었으나, 서버에 업로드가 제한되어 아쉬웠으며, 반대로 오픈api가 아님에도 서버에 데이터가 비암호화 되어 노출된다면, 악용이 가능함을 인지하였습니다.</li></ul></div>
+                                <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="알림톡.png"><i class="fas fa-image"></i> '보건증 알림 톡' 확인하기</button></div>
+                                <div class="pdf-image-container"><img src="알림톡.png" alt="'보건증 알림 톡' 상세 이미지"></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">Excel - 함수를 활용한 엑셀 자동화 개발</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 법적 체크리스트들의 항목들이 매월 특정 부분들을 변경해야 함.</li><li><strong>실행:</strong> <br>-공통 부분을 확인.<br>-함수를 활용하여, today를 체크, 값을 자동으로 변경하도록 함수 설정.</li><li><strong>결과:</strong> 2~30개의 시트들의 각 항목들을 직접 수정하는 기존 방식에서, 엑셀을 열고 출력버튼만 누르도록 변경.</li></ul></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">'사무장 병원' 문제 해결 (2022고단 2106)</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 치과 잠적으로 인한 다수 피해자 발생 및 초기 경찰 수사 난항.</li><li><strong>실행:</strong> <br>-1,400여 명의 피해자를 모집.<br>-계약서 수집 및 '대표원장 변경 이력'이라는 핵심 데이터를 발견하여 분석 자료를 생성. <br>-'사무장 병원' 가설을 세우고 증거를 확보하여 수사기관에 제공.<br>-피해자 대표로서 병원장과 3자대면 진행.<br>-시사프로그램 및 뉴스 인터뷰 출연.<br>-고소장 작성 방법 안내 및 피해 회복 지원.</li><li><strong>결과:</strong> 경찰 내 담당 부서 신설을 이끌어냈으며, 최종적으로 의료법 위반 및 사기죄 징역형이라는 결과를 도출하는 데 결정적인 역할을 수행 및 약 2억원의 기부를 받아 피해자들의 피해회복에 도움을 줌.</li><li><strong>실패 및 러닝 포인트:</strong> : 피해자 전원의 피해 회복을 달성하지 못하여 아쉬웠으나, 1400명을 언론 담당, 피해자 모집, 대관업무, 병원 관계자 컨택 등 능력에 맞게 역할을 부여하고 빠르게 조직을 구성하는 능력을 키웠으며, 큰 사이즈의 사건에서 빠른 실행력으로 문제해결 능력을 키웠습니다. </li></ul></div>
+                                <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="치과.png"><i class="fas fa-image"></i> '시사프로그램 출연' 확인하기</button></div>
+                                <div class="pdf-image-container"><img src="치과.png" alt="'시사프로그램 출연' 상세 이미지"></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">통신사 계약 분쟁 해결 (2022형제 28230)</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 5G 서비스 불가지역임에도 불구하고, 위조된 서명을 근거로 통신사가 환불/보상을 거부.</li><li><strong>실행:</strong> <br>-'동의서'의 원본을 요청하여 서명 위조 확인.<br>-대리점의 위조 사실을 인정하는 진술을 확보.<br>-mbc에 5g관련 인터뷰 진행.</li><li><strong>결과:</strong> 명확한 증거를 바탕으로 사문서 위조 및 동행사 혐의로 고소하여, 신속하게 원만한 해결을 이끌어냄.</li></ul></div>
+                                <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="mbc.png"><i class="fas fa-image"></i> 'MBC 인터뷰' 확인하기</button></div>
+                                <div class="pdf-image-container"><img src="mbc.png" alt="'MBC 인터뷰' 상세 이미지"></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">보험 사기 및 공갈 사건 대응</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 지인에게 상대측의 고의성이 의심되는 교통사고 발생, 상대측이 금원을 요구, 경찰이 사건 접수를 거부하는 상황.</li><li><strong>실행:</strong> <br>-진단서 미제출, 병원 미방문, 현금 합의 요구 등 보험 사기의 정황 증거를 수집.<br>-정보공개 청구를 통하여 사고영상 확보.<br>-관련 대법원 판례를 분석하여 30장 분량의 고소장을 작성<br>-신뢰관계인 동석제도를 활용하여, 경찰서 방문 및 피해자 진술 보조.</li><li><strong>결과:</strong> 경찰의 초기 판단을 뒤집고 고소장 접수 및 기소의견 송치를 이끌어냄.</li></ul></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">임대차 계약 리스크 관리</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 팀에서 '문제없음'으로 결론 내린 임차 건물 임대차 계약서의 문제점 발견.</li><li><strong>실행:</strong> <br>-계약서를 재검토하여, 관리비의 특정 부분의 책임이 임대인측에 있으며, 위반 시 임대인측의 위약벌 조항을 발견.<br>-임대차계약서를 기반으로 보고서를 작성하여 제출.</li><li><strong>결과:</strong> 회사의 손실을 사전에 예방하고, 법률 검토 능력을 인정받음.</li></ul></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">업체 선정 방식 변경</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 기존 프로세스 상 기존 업체 혹은 단일 업체를 선정하여, 비용이 많이 발생.</li><li><strong>실행:</strong> <br>-수선 혹은 업체 계약시 필요한 부분을 직접 파악.<br>-필요한 부분만 다수의 업체에 견적서 발급 요청 및 가격 협상 진행.</li><li><strong>결과:</strong> 매 분기 고정비 지출을 20%절약 및 과도한 수선비 억제.</li></ul></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">금융 투자</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 2017년 코인 투자로 -98%손실을 경험.</li><li><strong>실행:</strong> <br>-채권금리, foms회의록, 환율, 미국 금리결정, 양적완화 등 경제에 대하여 공부.<br>-코인, 국내 주식, etf, 해외선물 투자를 진행하며 시장에 지속적 참여로 지식을 얻음.</li><li><strong>결과:</strong> 현재 배당, 해외선물, 국내 주식 투자를 진행하며, 월 평균 500만원 이상의 안정적인 수익을 확보.</li></ul></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header"><h4 class="accordion-title">주식 매매 사이트</h4><i class="fas fa-chevron-down accordion-icon"></i></button>
+                            <div class="accordion-content">
+                                <div class="project-section"><ul><li><strong>문제:</strong> 간편하게 로그인하고, 종목을 매수할 때, 자동으로 손절과 익절 감시가 불가능.</li><li><strong>실행:</strong> <br>- 한국투자증권 api를 활용하여, 주식 매수와 매도 기능 구현.<br>-보안이 가장 중요하다 생각하여, 봇 방지(Cloudflare Turnstile) + 세션 기반 인증 + 외부 OAuth(Kakao) + HTTPS(SSL) + 지문 인증(주문시) + 개발자도구 차단(js로 dev체크하여 강제 로그아웃, js off하면 로그인부터 불가능) + 모든 개인정보를 Fernet 대칭키 암호화로 보호하고, 저장 시에도 암호화 + Base64 처리해서 파일만으로는 절대 식별/사용할 수 없도록 설계. </li><li><strong>결과:</strong>최대한 간편하게 만들지만, 해킹을 방지하고자 암호화에 신경을 많이 썼던 프로젝트였습니다. 당시 도메인을 구매하여, 실제로 매수, 매도 주문을 실행해보았고, 원하는 기능이 있으면 직접 만들어보자는 저의 실행력의 결과는 성공적이었습니다. 다만, 테스트용 소액 계좌가 아닌 계좌를 연결하기에는 1인 개발로 보안에 허점이 있다 판단, 실제 고객을 모집하고 서비스를 해보지는 못해 아쉬웠으나, 해킹 및 취약점을 많이 고려하고 공부해보는 기회가 되었습니다.</li></ul></div>
+                                <div class="toss-button-container"><button class="toss-button open-modal-btn" data-img-src="주식.png"><i class="fas fa-image"></i> '주식 매매 사이트' 확인하기</button></div>
+                                <div class="pdf-image-container"><img src="주식.png" alt="'주식 매매사이트' 상세 이미지"></div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </section>
 
-           
-
                 <section id="Motivation for application" class="section fade-in-up">
                     <h2 class="section-title">Motivation for application</h2>
-       
                     <div class="project-card">
                         <div class="project-card-header">
                             <h3 class="project-title">"사장님의 고충을 해결하는 아이디어를 실현할 수 있는 길, toss place에서 찾았습니다."</h3>
@@ -165,20 +187,23 @@
                                 <li>저의 지난 10년은 '외식업'이라는 한 우물을 파며, 코딩, 금융, 법률이라는 전혀 다른 능력들도 연마해 온 시간이었습니다.<br>VIPS와 라구뜨의 뜨거운 주방에서는 '현장의 언어'를 배웠고, CJ CGV에서는 경험을 실행해 볼 수 있었습니다.</li>
                                 <li>월마감이 다가오는 20일, 남은 10일동안 직원들은 그동안 발주한 식자재의 품목명, 가격, 단위 등을 입력하고 결재를 받고, 각종 법적 서류들을 업데이트하느라 최소 1~2시간 야근을하고,<br>제가 담당하는 업체의 발주가 적은 달, 430개의 항목들, 혹시라도 금액이 맞지 않는다면 다시 하나 하나 비교하느라 마감일에 집을 갈 수 없습니다.</li>
                                 <li><strong>'반드시 풀어야 할 문제'</strong>로 생각하였고, AI가 거래명세서를 대신 입력하고, 셀레니움을 활용하여 하드코딩으로 사내 사이트와 연동하여 발주 입력부터 결재단계 이전까지 모두 자동화 하였습니다.</li>
-                                <li>이 경험들을 통해, 현장의 문제를 기술과 실행으로 해결할 수 있다는 강한 자신감을 얻었습니다.</li><hr>
+                                <li>이 경험들을 통해, 현장의 문제를 기술과 실행으로 해결할 수 있다는 강한 자신감을 얻었습니다.</li>
+                            </ul>
                         </div>
                         <div class="project-section">
                             <h4>2. 'CJ Partners ONE': 성공적으로 검증된, 그러나 아쉬웠던 실패</h4>
                             <ul>
                                 <li>저의 조리, 코딩, 금융, 법률 경험들이 합쳐진 것이, (주)CJ그룹 사내벤처에서 제가 모든 것을 쏟아부었던 'CJ Partners ONE' 프로젝트였습니다.</li>
                                 <li>저는 현장에서 발견한 사장님들의 Pain Point들을 해결하기 위해 AI 기반의 통합 솔루션을 설계했고,<br>나아가 CJ ONE 결제망을 오프라인으로 확장하여 사장님들께는 편리함과 새로운 고객을, 소비자에게는 더 큰 혜택을 제공하는 선순환 구조를 구체화했습니다. <br>
-                                <li>안타깝게 최종 선발의 문턱을 넘지는 못했지만, 사업의 최대 경쟁사로 생각하였던, 토스에서도 아직은 엑셀 수기 입력을 하여 저의 <strong>계획을 실현하고 싶었습니다.</strong></li><hr>
+                                <li>안타깝게 최종 선발의 문턱을 넘지는 못했지만, 사업의 최대 경쟁사로 생각하였던, 토스에서도 아직은 엑셀 수기 입력을 하여 저의 <strong>계획을 실현하고 싶었습니다.</strong></li>
+                            </ul>
                         </div>
                         <div class="project-section">
                             <h4>3. qr오더, 보안</h4>
                             <ul>
                                 <li>사업을 구상하며, 다양한 QR오더를 테스트해보고 보안에 대해서도 고민했습니다.<br>주문한 페이지를 나중에 다시 접속하거나, URL로 접속하면 악용이 가능하지 않을까?<br>토스오더의 경우 세션에 1회용 tid를 부여하여 재접속시 주문이 불가하게 막아두었지만, QR코드를 찍어두었다면, <strong>악용이 가능했습니다.</strong></li>
-                                <li>이러한 문제를 어떻게 해결할지 고민을 하였고 해답을 찾았습니다.</li><hr>
+                                <li>이러한 문제를 어떻게 해결할지 고민을 하였고 해답을 찾았습니다.</li>
+                            </ul>
                         </div>
                         <div class="project-section">
                             <h4>4. toss place</h4>
@@ -191,16 +216,18 @@
                                 <li>미 국채와 스테이블코인의 관계를 볼 때, 전세계적으로 스테이블코인의 성장은 확실하다고 보여집니다. 한국에서도 스테이블코인과 관련된 논의가 이루어지고 있고, 무엇보다 스테이블코인의 성공은 사용처라고 사료됩니다. 매일 우리는 카페, 음식점, 학원, 병원 등에서 결제를 하고 이곳은 저희 toss place를 경험할 수 있는 곳입니다.</li>
                                 <li>toss place에서 새로운 기능들을 실패하더라도 가장 먼저 시도해보고, 사장님들의 사랑을, 그리고 소비자들의 선택을 받을 수 있도록,<br><br>저의 모든 역량을 쏟아붓고 Product Owner로서 <strong>도전하고 싶습니다.</strong><br><br>감사합니다.
                                 <br>김도영 드림.</li>
-                                <div class="toss-button-container">
-                                    <button id="ideas-button" class="toss-button ideas-button">
-                                        <i class="fas fa-lightbulb"></i> 'toss place에서 하고 싶은 일' 확인하기
-                                    </button>
-                                </div>
-                            <hr>
+                                
+                            </ul>
                         </div>
-                        
+                        <div class="toss-button-container">
+                            <button id="ideas-button" class="toss-button ideas-button">
+                                <i class="fas fa-lightbulb"></i> 'toss place에서 하고 싶은 일' 확인하기
+                            </button>
+                        </div>
+                        <div class="ilovetoss-print-image">
+                            <img src="ilovetoss.png" alt="토스에서">
+                        </div>
                     </div>
-                    
                 </section>
 
                 <section id="timeline" class="section fade-in-up">
@@ -214,7 +241,12 @@
                             <div class="timeline-bar" data-start="2016.06" data-end="2020.12"><div class="bar-label"><strong>The Classic 500</strong></div><div class="bar-tooltip"></div></div>
                             <div class="timeline-bar" data-start="2014.03" data-end="2017.02"><div class="bar-label"><strong>서울관광고</strong></div><div class="bar-tooltip"></div></div>
                         </div>
-                        <div class="timeline-axis"></div><hr>
+                        <div class="timeline-axis"></div>
+                        <!-- === [추가] 출력용 타임라인 이미지 === -->
+                        <div class="timeline-print-image">
+                            <img src="timeline.png" alt="경력 타임라인">
+                        </div>
+                        <!-- =============================== -->
                     </div>
                 </section>
        
@@ -223,33 +255,34 @@
                     <div class="skills-container">
                         <span class="skill-tag">외식경영관리사</span><span class="skill-tag">MOS</span><span class="skill-tag">ITQ한글</span><span class="skill-tag">ITQ파워포인트</span><span class="skill-tag">ITQ인터넷</span><span class="skill-tag">ITQ엑셀</span><span class="skill-tag">컴퓨터활용능력</span><span class="skill-tag">워드프로세서</span><span class="skill-tag">한식조리기능사</span><span class="skill-tag">양식조리기능사</span>
                     </div>
-                </section><hr>
+                </section>
 
                 <section id="skills" class="section fade-in-up">
                     <h2 class="section-title">Skills</h2>
                     <div class="skills-container">
                         <span class="skill-tag">사업 전략</span><span class="skill-tag">비즈니스 모델링</span><span class="skill-tag">재무 분석</span><span class="skill-tag">파트너십</span><span class="skill-tag">Python</span><span class="skill-tag">HTML/CSS</span><span class="skill-tag">데이터 분석</span><span class="skill-tag">법률 리스크 분석</span>
                     </div>
-                </section><hr>
+                </section>
                 
                 <section id="education" class="section fade-in-up">
                     <h2 class="section-title">Education</h2>
                      <p><strong>경기대학교</strong> - 외식조리과학과 (2017.03 ~ 2021.02)</p>
                      <p><strong>서울관광고등학교</strong> - 조리과 (2014.03 ~ 2017.02)</p>
                 </section>
-           
             </main>
         </div>
     </div>
+    
     <div id="image-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="close-modal-btn" class="close-button">&times;</button>
-            <!-- img 태그에 id="modal-image" 추가, 초기 src는 비워둠 -->
+        <div class="modal-content image-modal-content">
+            <div class="modal-header image-modal-header">
+                <h2 id="image-modal-title"></h2> 
+                <button id="image-close-button" class="close-button image-close-button">&times;</button>
+            </div>
             <img id="modal-image" src="" alt="상세 이미지">
         </div>
     </div>
 
-    <!-- === [추가] '하고 싶은 일' 모달 === -->
     <div id="ideas-modal" class="modal-overlay">
         <div class="modal-content ideas-modal-content">
             <div class="modal-header">
@@ -289,29 +322,21 @@
                     <div class="feature-icon" style="background-color: #F3F4F6; color: #6B7280;"><i class="fas fa-comment-dots"></i></div>
                     <div class="feature-text">
                         <h3>더 많은 아이디어들</h3>
-                        <p>더 많은 pain point들을 기회로 toss place의 새롭고 편리한 기능들을 만들고 싶습니다.</p>
+                        <p>나머지 기능들과 구체적인 실행 방안은, 면접에서 직접 보여드리고 싶습니다!</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- === [추가] 스크롤 UI 요소 === -->
+
     <a href="#projects" id="scroll-down-indicator" class="scroll-down-indicator">
         <i class="fas fa-chevron-down"></i>
     </a>
     <button id="scroll-to-top-btn" class="scroll-to-top-btn hidden">
         <i class="fas fa-arrow-up"></i>
     </button>
-    <script src="script.js?v=1.1"></script>
+    
+    <script src="script.js?v=2.1"></script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
