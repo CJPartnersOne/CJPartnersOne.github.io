@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- [추가] Modal Image Preloading ---
+    // --- Modal Image Preloading ---
     const allModalButtons = document.querySelectorAll('.open-modal-btn');
     allModalButtons.forEach(btn => {
         const imgSrc = btn.dataset.imgSrc;
@@ -9,18 +9,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- [추가] Scroll Fade-in Animation Logic ---
+    // --- [수정] Scroll Fade-in Animation Logic ---
     const fadeInElements = document.querySelectorAll('.fade-in-up');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    // Intersection Observer가 지원되지 않는 구형 브라우저를 위한 예외 처리
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // 한번 나타난 후에는 관찰 중지
+                }
+            });
+        }, {
+            threshold: 0.1
         });
-    }, {
-        threshold: 0.1 // 섹션이 10% 보이면 애니메이션 시작
-    });
-    fadeInElements.forEach(el => observer.observe(el));
+        fadeInElements.forEach(el => observer.observe(el));
+    } else {
+        // Intersection Observer 미지원 시, 모든 요소를 그냥 보여줌
+        fadeInElements.forEach(el => el.classList.add('visible'));
+    }
     // --- Timeline Graph Logic ---
     
     const timelineBars = document.querySelectorAll('.timeline-bar');
