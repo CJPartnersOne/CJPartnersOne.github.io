@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- [추가] Modal Image Preloading ---
+    const allModalButtons = document.querySelectorAll('.open-modal-btn');
+    allModalButtons.forEach(btn => {
+        const imgSrc = btn.dataset.imgSrc;
+        if (imgSrc) {
+            const preloader = new Image();
+            preloader.src = imgSrc;
+        }
+    });
+
+    // --- [추가] Scroll Fade-in Animation Logic ---
+    const fadeInElements = document.querySelectorAll('.fade-in-up');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1 // 섹션이 10% 보이면 애니메이션 시작
+    });
+    fadeInElements.forEach(el => observer.observe(el));
     // --- Timeline Graph Logic ---
     
     const timelineBars = document.querySelectorAll('.timeline-bar');
@@ -149,7 +171,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (ideasButton && ideasModal && ideasCloseButton) {
         ideasButton.addEventListener('click', () => {
+            // 폭죽 효과 실행!
             ideasModal.classList.add('visible');
+            confetti({
+                particleCount: 150, // 파티클 개수
+                spread: 90,       // 퍼지는 각도
+                origin: { y: 0.7 },
+                zIndex: 9999  // 화면의 70% 높이에서 시작
+            });
+            
         });
 
         function closeIdeasModal() {
@@ -167,5 +197,89 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeIdeasModal();
             }
         });
+    }
+
+ // --- [수정] Scroll UI Logic (지능형 스크롤) ---
+    const scrollDownIndicator = document.getElementById('scroll-down-indicator');
+    const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+    const educationSection = document.getElementById('education');
+
+    if (scrollDownIndicator && scrollToTopBtn && educationSection) {
+        // 스크롤 다운 버튼 클릭 시 (지능형 타겟 설정)
+        scrollDownIndicator.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const currentScroll = mainContent.scrollTop;
+            const windowHeight = mainContent.clientHeight;
+            
+            // Case 1: 페이지 최상단에 있을 경우, 첫 섹션으로 이동
+            if (currentScroll < 50) {
+                const firstSection = document.getElementById('projects');
+                if (firstSection) {
+                    mainContent.scrollTo({ top: firstSection.offsetTop - 30, behavior: 'smooth' });
+                }
+                return;
+            }
+
+            // Case 2 & 3: 그 외의 경우
+            const defaultNextScroll = currentScroll + windowHeight - 50;
+            const sectionsArray = Array.from(sections);
+
+            // 현재 보이는 화면 바로 아래부터, 기본 스크롤 위치 사이에 시작하는 섹션이 있는지 찾습니다.
+            const nextSectionInView = sectionsArray.find(section => {
+                const sectionTop = section.offsetTop;
+                // 현재 스크롤 위치보다 아래에 있고(약간의 버퍼 +50px), 기본 스크롤 위치보다는 위에 있는 섹션
+                return sectionTop > (currentScroll + 50) && sectionTop < defaultNextScroll;
+            });
+
+            let targetScrollPosition;
+
+            if (nextSectionInView) {
+                // Case 3: 만약 그런 섹션이 있다면, 그 섹션의 상단으로 정확히 이동합니다.
+                targetScrollPosition = nextSectionInView.offsetTop - 30; // 상단에 약간의 여백
+            } else {
+                // Case 2: 없다면, 원래 계획대로 한 화면 아래로 스크롤합니다.
+                targetScrollPosition = defaultNextScroll;
+            }
+
+            // 최종 계산된 위치로 부드럽게 스크롤합니다.
+            mainContent.scrollTo({
+                top: targetScrollPosition,
+                behavior: 'smooth'
+            });
+        });
+
+        // 최상단으로 이동 버튼 클릭 시
+        scrollToTopBtn.addEventListener('click', () => {
+            mainContent.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 스크롤 위치에 따른 UI 가시성 제어
+        mainContent.addEventListener('scroll', () => {
+            const isAtBottom = mainContent.scrollHeight - mainContent.scrollTop - mainContent.clientHeight < 50;
+            if (isAtBottom) {
+                scrollDownIndicator.classList.add('hidden');
+            } else {
+                scrollDownIndicator.classList.remove('hidden');
+            }
+        });
+
+        // 'Education' 섹션 감지를 위한 Intersection Observer
+        const topBtnObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    scrollToTopBtn.classList.remove('hidden');
+                } else {
+                    if (mainContent.scrollTop < entry.target.offsetTop) {
+                        scrollToTopBtn.classList.add('hidden');
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        topBtnObserver.observe(educationSection);
     }
 });
