@@ -14,6 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tosskdy.github.io/">
     <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
 </head>
 <body>
@@ -61,7 +62,7 @@
             </header>
 
             <main>
-                <section id="projects" class="section">
+                <section id="projects" class="section fade-in-up">
                     <h2 class="section-title">Projects & Experience</h2>
                     
 
@@ -136,7 +137,7 @@
 
            
 
-                <section id="Motivation for application" class="section">
+                <section id="Motivation for application" class="section fade-in-up">
                     <h2 class="section-title">Motivation for application</h2>
        
                     <div class="project-card">
@@ -188,7 +189,7 @@
                     
                 </section>
 
-                <section id="timeline" class="section">
+                <section id="timeline" class="section fade-in-up">
                     <h2 class="section-title">Timeline</h2>
                     <div class="career-timeline">
                         <div class="timeline-chart">
@@ -203,21 +204,21 @@
                     </div>
                 </section>
        
-                <section id="Certificate" class="section">
+                <section id="Certificate" class="section fade-in-up">
                     <h2 class="section-title">Certificate</h2>
                     <div class="skills-container">
                         <span class="skill-tag">외식경영관리사</span><span class="skill-tag">MOS</span><span class="skill-tag">ITQ한글</span><span class="skill-tag">ITQ파워포인트</span><span class="skill-tag">ITQ인터넷</span><span class="skill-tag">ITQ엑셀</span><span class="skill-tag">컴퓨터활용능력</span><span class="skill-tag">워드프로세서</span><span class="skill-tag">한식조리기능사</span><span class="skill-tag">양식조리기능사</span>
                     </div>
                 </section><hr>
 
-                <section id="skills" class="section">
+                <section id="skills" class="section fade-in-up">
                     <h2 class="section-title">Skills</h2>
                     <div class="skills-container">
                         <span class="skill-tag">사업 전략</span><span class="skill-tag">비즈니스 모델링</span><span class="skill-tag">재무 분석</span><span class="skill-tag">파트너십</span><span class="skill-tag">Python</span><span class="skill-tag">HTML/CSS</span><span class="skill-tag">데이터 분석</span><span class="skill-tag">법률 리스크 분석</span>
                     </div>
                 </section><hr>
                 
-                <section id="education" class="section">
+                <section id="education" class="section fade-in-up">
                     <h2 class="section-title">Education</h2>
                      <p><strong>경기대학교</strong> - 외식조리과학과 (2017.03 ~ 2021.02)</p>
                      <p><strong>서울관광고등학교</strong> - 조리과 (2014.03 ~ 2017.02)</p>
@@ -280,6 +281,13 @@
             </div>
         </div>
     </div>
+    <!-- === [추가] 스크롤 UI 요소 === -->
+    <a href="#projects" id="scroll-down-indicator" class="scroll-down-indicator">
+        <i class="fas fa-chevron-down"></i>
+    </a>
+    <button id="scroll-to-top-btn" class="scroll-to-top-btn hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script src="script.js"></script>
 
 </body>
