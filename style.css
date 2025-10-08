@@ -399,3 +399,81 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
         display: block;
     }
 }
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === [추가] 버튼/카드 호버 효과 강화 === */
+.toss-button, .timeline-bar {
+    transition: all 0.3s ease; /* all로 변경하여 그림자 효과도 부드럽게 */
+}
+
+
+/* === [추가] 스크롤 UI 스타일 === */
+.scroll-down-indicator {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-secondary);
+    font-size: 24px;
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: bounce 2s infinite;
+    z-index: 900;
+}
+
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--toss-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 900;
+}
+
+.scroll-to-top-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* 숨김 클래스 */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+/* translateX는 scroll-down-indicator에만 적용 */
+.scroll-down-indicator.hidden {
+    transform: translate(-50%, 20px);
+}
+
+
+/* 바운스 애니메이션 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -10px);
+    }
+    60% {
+        transform: translate(-50%, -5px);
+    }
+}
