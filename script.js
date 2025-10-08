@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
- // --- [수정] Scroll UI Logic (지능형 스크롤) ---
+     // --- [수정] Scroll UI Logic (지능형 스크롤 v2) ---
     const scrollDownIndicator = document.getElementById('scroll-down-indicator');
     const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
     const educationSection = document.getElementById('education');
@@ -236,27 +236,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Case 2 & 3: 그 외의 경우
-            const defaultNextScroll = currentScroll + windowHeight - 50;
+            // [수정] 기본 스크롤 이동값을 화면 높이의 80% 정도로 조정하여, 덜 내려가도록 설정
+            const defaultNextScroll = currentScroll + (windowHeight * 0.8); 
             const sectionsArray = Array.from(sections);
 
-            // 현재 보이는 화면 바로 아래부터, 기본 스크롤 위치 사이에 시작하는 섹션이 있는지 찾습니다.
             const nextSectionInView = sectionsArray.find(section => {
                 const sectionTop = section.offsetTop;
-                // 현재 스크롤 위치보다 아래에 있고(약간의 버퍼 +50px), 기본 스크롤 위치보다는 위에 있는 섹션
                 return sectionTop > (currentScroll + 50) && sectionTop < defaultNextScroll;
             });
 
             let targetScrollPosition;
 
             if (nextSectionInView) {
-                // Case 3: 만약 그런 섹션이 있다면, 그 섹션의 상단으로 정확히 이동합니다.
-                targetScrollPosition = nextSectionInView.offsetTop - 30; // 상단에 약간의 여백
+                // 다음 섹션이 가까우면, 그 섹션 상단으로 이동
+                targetScrollPosition = nextSectionInView.offsetTop - 30;
             } else {
-                // Case 2: 없다면, 원래 계획대로 한 화면 아래로 스크롤합니다.
+                // 다음 섹션이 멀면, 한 화면의 80%만큼 아래로 이동
                 targetScrollPosition = defaultNextScroll;
             }
 
-            // 최종 계산된 위치로 부드럽게 스크롤합니다.
             mainContent.scrollTo({
                 top: targetScrollPosition,
                 behavior: 'smooth'
@@ -297,3 +295,4 @@ document.addEventListener('DOMContentLoaded', function() {
         topBtnObserver.observe(educationSection);
     }
 });
+
