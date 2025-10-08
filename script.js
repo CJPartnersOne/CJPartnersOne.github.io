@@ -1,3 +1,4 @@
+// version: 2.0
 document.addEventListener('DOMContentLoaded', function() {
     // --- Modal Image Preloading ---
     const allModalButtons = document.querySelectorAll('.open-modal-btn');
@@ -9,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-   // --- [수정] Scroll Fade-in Animation Logic (v2) ---
-    const fadeInElements = document.querySelectorAll('.fade-in-up');
+    // --- Scroll Animation Logic ---
+    const animatedElements = document.querySelectorAll('.fade-in-up, .timeline-bar');
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -20,23 +21,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, {
-            threshold: 0.01, // [수정 1] 애니메이션 시작 조건을 더 완화 (1%만 보여도 시작)
-            rootMargin: '0px 0px -50px 0px' // [수정 2] 화면 하단에서 50px 위에서부터 감지 시작
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
-
-        fadeInElements.forEach((el, index) => {
-            // [수정 3] 첫 번째 애니메이션 요소는 즉시 보이도록 처리
-            if (index === 0) {
-                el.classList.add('visible');
+        animatedElements.forEach((el) => {
+            // Profile 섹션은 즉시 보이도록 처리
+            if (el.closest('section')?.id === 'profile') {
+                 el.classList.add('visible');
             } else {
                 observer.observe(el);
             }
         });
     } else {
-        fadeInElements.forEach(el => el.classList.add('visible'));
+        animatedElements.forEach(el => el.classList.add('visible'));
     }
+
+    // --- Accordion Logic ---
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            header.classList.toggle('active');
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                // 부드러운 스크롤을 위해 약간의 여유를 줌
+                content.style.maxHeight = (content.scrollHeight + 20) + "px";
+            }
+        });
+    });
+
     // --- Timeline Graph Logic ---
-    
     const timelineBars = document.querySelectorAll('.timeline-bar');
     const timelineAxis = document.querySelector('.timeline-axis');
     if (timelineBars.length > 0 && timelineAxis) {
@@ -119,81 +134,56 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    const openModalBtns = document.querySelectorAll('.open-modal-btn');
+    // --- Image Modal Logic ---
     const imageModal = document.getElementById('image-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn');
+    const imageCloseButton = document.getElementById('image-close-button');
     const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('image-modal-title');
 
-    // === [추가] 이미지 캐시 저장용 ===
-    const imageCache = {};
-
-    if (imageModal && closeModalBtn && modalImage) {
-        // 페이지 로드시 백그라운드에서 미리 이미지 로드
-        openModalBtns.forEach(btn => {
-            const imgSrc = btn.dataset.imgSrc;
-            if (imgSrc && !imageCache[imgSrc]) {
-                const img = new Image();
-                img.src = imgSrc;
-                img.onload = () => imageCache[imgSrc] = img;
-            }
-        });
-
-        openModalBtns.forEach(btn => {
+    if (imageModal && imageCloseButton && modalImage && modalTitle) {
+        allModalButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const imgSrc = btn.dataset.imgSrc;
-                if (!imgSrc) return;
-
-                modalImage.style.opacity = '0';
-                modalImage.src = ''; 
-                imageModal.classList.add('visible');
-
-                // 캐시에 있으면 즉시 표시
-                if (imageCache[imgSrc]) {
+                const titleText = btn.textContent.replace(/['‘’""]/g, '').replace(/ ?확인하기$/, '').trim();
+                if (imgSrc) {
+                    modalTitle.textContent = titleText;
                     modalImage.src = imgSrc;
-                    modalImage.style.opacity = '1';
-                } else {
-                    // 혹시 캐시 안된 경우 대비
-                    const tempImg = new Image();
-                    tempImg.src = imgSrc;
-                    tempImg.onload = () => {
-                        imageCache[imgSrc] = tempImg;
-                        modalImage.src = imgSrc;
-                        modalImage.style.opacity = '1';
-                    };
+                    imageModal.classList.add('visible');
                 }
             });
         });
 
-        const closeImageModal = () => imageModal.classList.remove('visible');
+        function closeImageModal() {
+            imageModal.classList.remove('visible');
+        }
 
-        closeModalBtn.addEventListener('click', closeImageModal);
-        imageModal.addEventListener('click', e => {
-            if (e.target === imageModal) closeImageModal();
+        imageCloseButton.addEventListener('click', closeImageModal);
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                closeImageModal();
+            }
         });
-        document.addEventListener('keydown', e => {
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && imageModal.classList.contains('visible')) {
                 closeImageModal();
             }
         });
     }
 
-
+    // --- '하고 싶은 일' 모달 로직 ---
     const ideasButton = document.getElementById('ideas-button');
     const ideasModal = document.getElementById('ideas-modal');
     const ideasCloseButton = document.getElementById('ideas-close-button');
 
     if (ideasButton && ideasModal && ideasCloseButton) {
         ideasButton.addEventListener('click', () => {
-            // 폭죽 효과 실행!
-            ideasModal.classList.add('visible');
             confetti({
-                particleCount: 150, // 파티클 개수
-                spread: 90,       // 퍼지는 각도
+                particleCount: 150,
+                spread: 90,
                 origin: { y: 0.7 },
-                zIndex: 9999  // 화면의 70% 높이에서 시작
+                zIndex: 9999
             });
-            
+            ideasModal.classList.add('visible');
         });
 
         function closeIdeasModal() {
@@ -213,42 +203,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-     // --- [수정] Scroll UI Logic (지능형 스크롤 v3) ---
+    // --- Scroll UI Logic ---
     const scrollDownIndicator = document.getElementById('scroll-down-indicator');
     const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
     const educationSection = document.getElementById('education');
 
     if (scrollDownIndicator && scrollToTopBtn && educationSection) {
-        // 스크롤 다운 버튼 클릭 시 (지능형 타겟 설정)
         scrollDownIndicator.addEventListener('click', (e) => {
             e.preventDefault();
-            
             const currentScroll = mainContent.scrollTop;
             const windowHeight = mainContent.clientHeight;
-            
-            // 1. '한 화면 아래'로 스크롤할 위치를 계산합니다.
-            const pageDownScroll = currentScroll + (windowHeight * 0.8);
-            
-            const sectionsArray = Array.from(sections);
-            let nextSectionTop = Infinity; // 다음 섹션의 상단 위치를 무한대로 초기화
-
-            // 2. 현재 스크롤 위치 바로 아래에 있는 '다음 섹션'을 찾습니다.
-            const nextSection = sectionsArray.find(section => section.offsetTop > currentScroll + 50);
-            
-            if (nextSection) {
-                nextSectionTop = nextSection.offsetTop - 30; // 다음 섹션 상단 위치 (여백 포함)
+            if (currentScroll < 50) {
+                const firstSection = document.getElementById('projects');
+                if (firstSection) {
+                    mainContent.scrollTo({ top: firstSection.offsetTop - 30, behavior: 'smooth' });
+                }
+                return;
             }
-
-            // 3. '한 화면 아래'와 '다음 섹션 상단' 중 더 가까운(작은) 값으로 이동합니다.
-            const targetScrollPosition = Math.min(pageDownScroll, nextSectionTop);
-
+            const defaultNextScroll = currentScroll + (windowHeight * 0.8);
+            const sectionsArray = Array.from(sections);
+            const nextSection = sectionsArray.find(section => section.offsetTop > currentScroll + 50);
+            let nextSectionTop = nextSection ? nextSection.offsetTop - 30 : Infinity;
+            const targetScrollPosition = Math.min(defaultNextScroll, nextSectionTop);
             mainContent.scrollTo({
                 top: targetScrollPosition,
                 behavior: 'smooth'
             });
         });
 
-        // 최상단으로 이동 버튼 클릭 시
         scrollToTopBtn.addEventListener('click', () => {
             mainContent.scrollTo({
                 top: 0,
@@ -256,31 +238,64 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // 스크롤 위치에 따른 UI 가시성 제어
         mainContent.addEventListener('scroll', () => {
             const isAtBottom = mainContent.scrollHeight - mainContent.scrollTop - mainContent.clientHeight < 50;
-            if (isAtBottom) {
-                scrollDownIndicator.classList.add('hidden');
-            } else {
-                scrollDownIndicator.classList.remove('hidden');
-            }
+            scrollDownIndicator.classList.toggle('hidden', isAtBottom);
         });
 
-        // 'Education' 섹션 감지를 위한 Intersection Observer
         const topBtnObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    scrollToTopBtn.classList.remove('hidden');
-                } else {
-                    if (mainContent.scrollTop < entry.target.offsetTop) {
-                        scrollToTopBtn.classList.add('hidden');
-                    }
-                }
+                scrollToTopBtn.classList.toggle('hidden', !entry.isIntersecting && mainContent.scrollTop < entry.target.offsetTop);
             });
         }, { threshold: 0.1 });
 
         topBtnObserver.observe(educationSection);
     }
+
+    // --- Action Buttons Logic ---
+    const pdfBtn = document.getElementById('pdf-btn');
+    const printBtn = document.getElementById('print-btn');
+    const shareBtn = document.getElementById('share-btn');
+
+    // PDF 저장
+    pdfBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const pdfUrl = 'PO_김도영_tossplace.pdf'; // 업로드된 PDF 파일 경로
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'PO_김도영_tossplace_이력서.pdf'; // 다운로드될 파일 이름
+        link.style.display = 'none'; // 숨김 처리
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+    // 출력 - PDF 파일을 새 창에서 열기
+    printBtn.addEventListener('click', () => {
+        const pdfUrl = 'PO_김도영_tossplace.pdf';
+        window.open(pdfUrl, '_blank');
+    });
+
+    // 공유
+    shareBtn.addEventListener('click', async () => {
+        const url = window.location.href;
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: '김도영 | Product Owner 이력서',
+                    text: '김도영의 이력서를 확인해보세요.',
+                    url: url,
+                });
+            } else {
+                // navigator.share를 지원하지 않는 브라우저 (PC 등)
+                await navigator.clipboard.writeText(url);
+                alert('이력서 링크가 클립보드에 복사되었습니다.');
+            }
+        } catch (err) {
+            console.error('Share failed:', err);
+            // 복사 실패 시 수동 복사 안내
+            prompt('아래 주소를 복사하여 공유해주세요.', url);
+        }
+    });
 });
-
-
