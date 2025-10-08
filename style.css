@@ -464,6 +464,17 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
     transform: translate(-50%, 20px);
 }
 
+.status-badge {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 12px;
+    background-color: #E8F3FF; /* Light Toss Blue */
+    color: var(--toss-blue);
+    vertical-align: middle;
+}
 
 /* 바운스 애니메이션 */
 @keyframes bounce {
@@ -477,3 +488,4 @@ hr { border: none; border-top: 1px solid var(--border-gray); margin: 40px 0; }
         transform: translate(-50%, -5px);
     }
 }
+
