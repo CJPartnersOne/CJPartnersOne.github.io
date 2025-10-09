@@ -1,4 +1,4 @@
-// version: 2.0
+// version: 2.1
 document.addEventListener('DOMContentLoaded', function() {
     // --- Modal Image Preloading ---
     const allModalButtons = document.querySelectorAll('.open-modal-btn');
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.05,
+            rootMargin: '0px 0px -100px 0px'
         });
         animatedElements.forEach((el) => {
             // Profile 섹션은 즉시 보이도록 처리
@@ -299,3 +299,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
