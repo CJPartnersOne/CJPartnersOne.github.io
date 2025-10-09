@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pdfBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const pdfUrl = 'PO_김도영_tossplace.pdf'; // 업로드된 PDF 파일 경로
+        const pdfUrl = 'PO_김도영_tossplace.pdf?v=2.0'; // 업로드된 PDF 파일 경로
         const link = document.createElement('a');
         link.href = pdfUrl;
         link.download = 'PO_김도영_tossplace_이력서.pdf'; // 다운로드될 파일 이름
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 출력 - PDF 파일을 새 창에서 열기
     printBtn.addEventListener('click', () => {
-        const pdfUrl = 'PO_김도영_tossplace.pdf';
+        const pdfUrl = 'PO_김도영_tossplace.pdf?v=2.0';
         window.open(pdfUrl, '_blank');
     });
 
@@ -299,5 +299,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 
